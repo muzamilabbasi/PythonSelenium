@@ -18,6 +18,6 @@ class loginController(unittest.TestCase):
         password.send_keys()
         loginButton = self.driver.find_element_by_xpath("//*[@id='contents']/form/div/p[4]/button")
         loginButton.click()
-        
+    
 
     

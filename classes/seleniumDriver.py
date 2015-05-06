@@ -23,8 +23,11 @@ class seleniumDriver(unittest.TestCase):
         if (browser == "Chrome"):
             self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
             
-        elif (browser == "Firefox"):
+        elif (browser == "PhantomJs"):
             self.driver = webdriver.Firefox()
+        
+        #elif (browser == "PhantomJs"):
+         #   self.driver = webdriver.PhantomJS('../phantomjs-1.9.2-macosx/bin/phantomjs')
             
             
         url = 'https://rams-'+env+'.'+site+'.com'
@@ -32,9 +35,11 @@ class seleniumDriver(unittest.TestCase):
         self.driver.implicitly_wait(10)    
         self.login = loginController.loginController(self.driver)
         self.login.login()
+        self.driver.maximize_window()
         return self.driver
         
     def tearDown(self):
+        self.driver.save_screenshot('screenshot')
         self.driver.quit()
     
     if __name__ == "__main__":

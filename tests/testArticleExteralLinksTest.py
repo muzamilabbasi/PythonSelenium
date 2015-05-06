@@ -2,7 +2,7 @@ import time, unittest
 from pages.backend import AddArticlePage as AP
 from classes import PageActions
 from selenium.webdriver.common.by import By
-import seleniumDriver
+from classes import seleniumDriver
 from pages.frontend import ArticlePage
 
 class ArticleExternalLinksTest(seleniumDriver.seleniumDriver):

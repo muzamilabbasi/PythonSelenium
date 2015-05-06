@@ -1,10 +1,12 @@
-from selenium.webdriver.common.keys import Keys
+
 import time
 from pages.backend import EditorialPage
 from random import randint
 import re
 import unittest
 from pages.backend import RamsPage
+from selenium.webdriver.common.keys import Keys
+from numpy.f2py.auxfuncs import throw_error
 
 
 class AddArticlePage(EditorialPage.EditorialPage):
@@ -17,6 +19,10 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def getArticleBody(self):
         time.sleep(2)
         return self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[3]")
+        
+        #script = self.driver.execute_script("$('#body').prev()")
+        #print script
+        #return script 
     
     def setArticleBodyText(self,text):
         articleBodyText = self.getArticleBody()
@@ -46,9 +52,24 @@ class AddArticlePage(EditorialPage.EditorialPage):
         elif (region == "body"):
             articleDek = self.getArticleBody()
             articleDek.send_keys(Keys.CONTROL,'A')
+            #articleDek.send_keys(Keys.BACKSPACE)
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[1].click()
+        
+        elif (region == "directions"):
+            directionsBody = self.getDirectionsBody()
+            directionsBody.send_keys(Keys.CONTROL,'A')
+            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
+            time.sleep(2)
+            formatting[2].click()
+            
+        elif (region == "tips"):
+            directionsBody = self.getTipsBody()
+            directionsBody.send_keys(Keys.CONTROL,'A')
+            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
+            time.sleep(2)
+            formatting[3].click()
         
     def clickHtmlView(self,num=1):
         htmlButton = self.driver.find_elements_by_xpath('//*[@class="toolbar-right"]/button[2]')
@@ -62,6 +83,13 @@ class AddArticlePage(EditorialPage.EditorialPage):
     
     def getArticleDekHTML(self):
         return self.driver.find_element_by_xpath("//*[@id='sub_heading']").text
+
+    def getRecipeDirectionHTML(self):
+        return self.driver.find_element_by_xpath("//*[@id='recipe-preparations']").text
+        
+    def getRecipeTipsHTML(self):
+        return self.driver.find_element_by_xpath("//*[@id='recipe-body']").text
+        
     
     def setPullQuotes(self,text):
         articleBody = self.getArticleBody()
@@ -69,7 +97,6 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False;
             
         articleBody.clear()
-        
         toolbar = self.getBodyToolbar()
         
         if (toolbar is None):
@@ -115,6 +142,32 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
         internalLink = '$(".js-insert-internal-link").click()'
         self.driver.execute_script(internalLink)
+    
+    def clickDirectionsInternalLinks(self):
+        directionsBody = self.getDirectionsBody()
+        if(directionsBody is None):
+            return False
+        directionsBody.clear()
+        
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[12].click()
+        internalLink = '$(".js-insert-internal-link").click()'
+        self.driver.execute_script(internalLink)
+        
+    def clickTipsInternalLinks(self):
+        tipsBody = self.getTipsBody()
+        if(tipsBody is None):
+            return False
+        tipsBody.clear()
+        
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[15].click()
+        internalLink = '$(".js-insert-internal-link").click()'
+        self.driver.execute_script(internalLink)
         
     def clickDekExternalLinks(self):
         articleBody = self.getArticleDekBody()
@@ -140,6 +193,32 @@ class AddArticlePage(EditorialPage.EditorialPage):
         if (toolbar is None):
             return False
         toolbar[3].click()
+        
+        internalLink = '$(".js-insert-external-link").click()'
+        self.driver.execute_script(internalLink)
+    
+    def clickDirectionsExternalLinks(self):
+        directionsBody = self.getDirectionsBody()
+        if(directionsBody is None):
+            return False
+        directionsBody.clear()
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[12].click()
+        
+        internalLink = '$(".js-insert-external-link").click()'
+        self.driver.execute_script(internalLink)
+    
+    def clickTipsExternalLinks(self):
+        tipsBody = self.getTipsBody()
+        if(tipsBody is None):
+            return False
+        tipsBody.clear()
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[15].click()
         
         internalLink = '$(".js-insert-external-link").click()'
         self.driver.execute_script(internalLink)
@@ -175,6 +254,31 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
         #internalLink = '$(".js-insert-internal-link").click()'
         #self.driver.execute_script(internalLink)    
+    def clickTipsGalleryEmbed(self):
+        tipsBody = self.getTipsBody()
+        if(tipsBody is None):
+            return False
+        tipsBody.clear()
+        
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[20].click()
+        time.sleep(10)
+    
+    def clickTipsImageEmbed(self):
+        tipsBody = self.getTipsBody()
+        if(tipsBody is None):
+            return False
+        tipsBody.clear()
+        
+        toolbar = self.getBodyToolbar()
+        if (toolbar is None):
+            return False
+        toolbar[19].click()
+        time.sleep(10)
+    
+    
     
     def lightBox(self,type = "data-url"):
         
@@ -222,6 +326,25 @@ class AddArticlePage(EditorialPage.EditorialPage):
         rstrip = lstrip.rstrip('\',)')
         return rstrip
     
+    def getDirectionsContentUrlStripped(self): 
+        htmlBody = self.getRecipeDirectionHTML()
+        url =  re.findall('href="([^"]+)', htmlBody)
+        
+        data =  str(tuple(map(str, url)))
+        lstrip = data.lstrip('(\'')
+        rstrip = lstrip.rstrip('\',)')
+        return rstrip
+    
+    def getTipsContentUrlStripped(self): 
+        htmlBody = self.getRecipeTipsHTML()
+        url =  re.findall('href="([^"]+)', htmlBody)
+        
+        data =  str(tuple(map(str, url)))
+        lstrip = data.lstrip('(\'')
+        rstrip = lstrip.rstrip('\',)')
+        return rstrip
+    
+        
     def setArticleEmbedQuote(self,text="abcd",type="facebook"):
         articleBody = self.getArticleBody()
         if (articleBody is None):
@@ -255,15 +378,93 @@ class AddArticlePage(EditorialPage.EditorialPage):
         replaceStr = getBodytext.replace('loc="C"',"").replace('share="true"',"").replace('expand="true"',"").replace("image id=","").replace("[","").replace("]","").replace('"',"")
         return replaceStr
     
-    def clickOnGalleryEmbedInsertButton(self):
-        getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
-        if (getButton is None):
+    def clickOnGalleryEmbedInsertButton(self,number = 0):
+        getButton = self.driver.find_elements_by_xpath("//*[@id='popup_galleryRight']/button")
+        if (getButton == " "):
             return False
-        getButton.click()
+        #print "ClickButton"
+        getButton[number].click()
+        #embedButton = '$("#popup_galleryRight").eq(1).click()'
+        #self.driver.execute_script(embedButton)
+        
         
     def getGalleryId(self):
         getBodytext = self.getHtmlBody()
         replaceStr = getBodytext.replace('gid=',"").replace('embed_gallery',"").replace('type="simple"',"").replace("[","").replace("]","").replace('"',"")
         return replaceStr.strip()
+    
+    def getRecipeTipsGalleryId(self):
+        getBodytext = self.getRecipeTipsHTML()
+        replaceStr = getBodytext.replace('gid=',"").replace('embed_gallery',"").replace('type="simple"',"").replace("[","").replace("]","").replace('"',"")
+        return replaceStr.strip()
+    
+    def getContent(self,type = "Recipes"):
+        contentType = self.driver.find_element_by_xpath("//*[@id='content_type_id']")
+        for option in contentType.find_elements_by_tag_name('option'):
+            if option.text == type:
+                option.click()
+            else:
+                throw_error("Error")
+        
+    
+    def getIngredients(self):
+        ingredients = self.driver.find_elements_by_xpath("//*[@id='recipe-ingredient-name']")
+        if (ingredients == " "):
+            return False
+        return ingredients
+    
+    def setIngredientOne(self,text="Default Recipe"):
+        ingredientOne = self.getIngredients()
+        ingredientOne[0].clear()
+        ingredientOne[0].send_keys(text)
+    
+    def setIngredientTwo(self,text="Default Recipe"):
+        ingredientOne = self.getIngredients()
+        ingredientOne[1].clear()
+        ingredientOne[1].send_keys(text)
+    
+    def getDirectionsBody(self):
+        time.sleep(2)
+        return self.driver.find_element_by_xpath("//*[@class='special-container']/div[1]/div/div[3]/div[2]")
+    
+    def getTipsBody(self):
+        time.sleep(2)
+        return self.driver.find_element_by_xpath("//*[@class='special-container']/div[1]/div[2]/div[2]")
+
+    def setDirectionsForRecipes(self,text = "Default Directions"):
+        directionsTextBox = self.getDirectionsBody()
+        if (directionsTextBox is None):
+            return False
+        
+        directionsTextBox.clear()
+        directionsTextBox.send_keys(text)
+    
+    def setTipsforRecipes(self,text = "Default Tips"):
+        tipsTextBox = self.getTipsBody()
+        if (tipsTextBox is None):
+            return False
+        tipsTextBox.clear()
+        tipsTextBox.send_keys(text)
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
         
                 

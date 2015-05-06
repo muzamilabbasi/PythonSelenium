@@ -1,0 +1,9 @@
+2015-05-05 10:35:04.726 phantomjs[52722:507] *** WARNING: Method userSpaceScaleFactor in class NSView is deprecated on 10.7 and later. It should not be used in new applications. Use convertRectToBacking: instead. 
+PhantomJS is launching GhostDriver...
+[INFO  - 2015-05-05T14:35:04.771Z] GhostDriver - Main - running on port 50705
+[INFO  - 2015-05-05T14:35:04.892Z] Session [eb8f8290-f333-11e4-b535-85702e7c0dfd] - _decorateNewWindow - page.settings: {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.2 Safari/534.34","webSecurityEnabled":true}
+[INFO  - 2015-05-05T14:35:04.892Z] Session [eb8f8290-f333-11e4-b535-85702e7c0dfd] - page.customHeaders:  - {}
+[INFO  - 2015-05-05T14:35:04.892Z] Session [eb8f8290-f333-11e4-b535-85702e7c0dfd] - CONSTRUCTOR - Desired Capabilities: {"platform":"ANY","browserName":"phantomjs","version":"","javascriptEnabled":true}
+[INFO  - 2015-05-05T14:35:04.892Z] Session [eb8f8290-f333-11e4-b535-85702e7c0dfd] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.2","driverName":"ghostdriver","driverVersion":"1.0.4","platform":"mac-unknown-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2015-05-05T14:35:04.892Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: eb8f8290-f333-11e4-b535-85702e7c0dfd
+[ERROR - 2015-05-05T14:35:15.029Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1430836515021

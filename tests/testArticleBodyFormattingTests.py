@@ -4,7 +4,7 @@ from pages.backend import AddArticlePage as AP
 from pages.frontend import ArticlePage
 from classes import seleniumDriver
 
-class ArticleBodyFormatting(seleniumDriver.seleniumDriver):
+class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
     
     def testSetFontBold(self):
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -17,7 +17,7 @@ class ArticleBodyFormatting(seleniumDriver.seleniumDriver):
         currentTime = time.strftime("%H:%M:%S")        
         bodyText = "Default test value"+currentTime
         expectedBodyText = '<strong>'+bodyText+'</strong>'
-        
+        self.driver.save_screenshot("file.png")
         self.AddArticlePage.setArticleBodyText(bodyText)
         self.AddArticlePage.clickWYSIWYGFormatting("bold","body")
         self.assertTrue(self.AddArticlePage.save(), "cannot save an Article")
@@ -29,8 +29,11 @@ class ArticleBodyFormatting(seleniumDriver.seleniumDriver):
         self.AddArticlePage.loadUrl(self.AddArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
+        print expectedBodyText
+        print self.run.getBodyTextStyle()
+        
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
-    
+    ''''
 
     def testSetFontItalic(self):
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -78,7 +81,7 @@ class ArticleBodyFormatting(seleniumDriver.seleniumDriver):
         self.run = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
-
+    '''
 if __name__ == "__main__":
     unittest.main()
     #suite = unittest.TestLoader().loadTestsFromTestCase(ArticleBodyFormatting)

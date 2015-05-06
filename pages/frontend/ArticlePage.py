@@ -189,7 +189,6 @@ class ArticlePage(unittest.TestCase):
         getUrl = self.driver.find_element_by_xpath("//*[@ID='WIDGET']/DIV[2]/DIV/DIV[1]/DIV/DIV[2]/DIV/DIV/DIV[3]/DIV/A[2]")
         if (getUrl is None):
             return False
-        
         #url = getUrl.get_attribute("href")
         return getUrl
     
@@ -201,6 +200,46 @@ class ArticlePage(unittest.TestCase):
     
     def getGalleryShortTitle(self):
         return self.driver.find_element_by_xpath("//*[@id='site-wrapper']/article/div[1]/div[2]/div[2]/div[2]/div[2]/a/div[2]/div[2]").text
+    
+    def getRecipeRelatedGalleryEmbed(self):
+        return self.driver.find_element_by_xpath("//*[@class='embedded-recirc--title link-txt']").text
+    
+    def getRecipesIngredients(self):
+        ingredients = self.driver.find_elements_by_xpath("//*[@class='recipe-list recipe-ingredients-list']/li") 
+        if (ingredients == " "):
+            return False
+        return ingredients
+    
+    def getIngredientsOne(self):
+        ingredientsOne = self.getRecipesIngredients()
+        return ingredientsOne[0].text
+    
+    def getIngredientsTwo(self):
+        ingredientsOne = self.getRecipesIngredients()
+        return ingredientsOne[1].text
+    
+    def getDirectionTextElement(self):
+        return self.driver.find_element_by_xpath("//*[@class='recipe-content']/section/ol/li")
         
+    def getDirectionsText(self):
+        getDirections = self.getDirectionTextElement()
+        if (getDirections is None):
+            return False
+        return getDirections.text
     
-    
+    def getDirectionsTextInnerHtml(self):
+        getDirections = self.getDirectionTextElement()
+        if (getDirections is None):
+            return False
+        return getDirections.get_attribute("innerHTML")
+
+    def getTipsElement(self,type="link"):
+        
+        if (type == "link"):
+            return self.driver.find_element_by_xpath("//*[@class='recipe-content']/p/a")
+        elif(type == "text"):
+            return self.driver.find_element_by_xpath("//*[@class='recipe-content']/p")
+        else:
+            return False
+            
+        

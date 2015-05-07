@@ -21,7 +21,7 @@ class RamsPage(unittest.TestCase):
         #self.driver.get("http://rams-stage.cosmopolitan.com/m.php?t=articles") '''
             
     def getRandomEditorialArticle(self):
-        randomString = randint(1000,10000)
+        randomString = randint(5000,100000)
         searchBox = self.driver.find_element_by_id("id")
         searchBox.send_keys(randomString)
         

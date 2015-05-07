@@ -7,7 +7,7 @@ from pages.frontend import ArticlePage
 
 class testArticleRecipesInternallLink(seleniumDriver.seleniumDriver):
    
-
+    '''
     def testArticleDirectionsInternalLinksTest(self):
         
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -64,7 +64,7 @@ class testArticleRecipesInternallLink(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
         articlePage.getTipsElement("link").click()
         browserUrl = self.driver.current_url
-        assert addedContentUrl[0] in browserUrl
+        assert addedContentUrl[0] in browserUrl'''
     
 if __name__ == "__main__":
     unittest.main()

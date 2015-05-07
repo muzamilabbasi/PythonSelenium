@@ -4,7 +4,7 @@ from pages.frontend import ArticlePage
 from classes import seleniumDriver
 
 class testArticleRecipeGalleryEmbedTest(seleniumDriver.seleniumDriver):
-
+    '''
 
     def testRecipeGalleryEmbedTest(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -37,7 +37,7 @@ class testArticleRecipeGalleryEmbedTest(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(previewUrl)
         articlePage = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
-        assert dataId[1] in articlePage.getRecipeRelatedGalleryEmbed()
+        assert dataId[1] in articlePage.getRecipeRelatedGalleryEmbed()'''
         
 if __name__ == "__main__":
     unittest.main()

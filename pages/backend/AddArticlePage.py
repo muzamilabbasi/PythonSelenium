@@ -52,7 +52,6 @@ class AddArticlePage(EditorialPage.EditorialPage):
         elif (region == "body"):
             articleDek = self.getArticleBody()
             articleDek.send_keys(Keys.CONTROL,'A')
-            #articleDek.send_keys(Keys.BACKSPACE)
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[1].click()

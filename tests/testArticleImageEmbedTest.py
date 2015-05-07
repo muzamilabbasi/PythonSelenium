@@ -1,7 +1,7 @@
 import time, unittest
 from pages.backend import AddArticlePage as AP
 from pages.frontend import ArticlePage
-from pages.backend import Images as editImage
+from pages.backend import Images as editImages
 from classes import seleniumDriver
 
 class ArticleImageEmbedTest(seleniumDriver.seleniumDriver):
@@ -17,12 +17,11 @@ class ArticleImageEmbedTest(seleniumDriver.seleniumDriver):
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
-        
+        time.sleep(2)
         assert imageId[0] in addArticlePage.getImageId()
-        time.sleep(1)
         previewUrl = addArticlePage.getPreviewUrl()
         
-        editImage = editImage.Images(self.driver)
+        editImage = editImages.Images(self.driver)
         editImage.searchImagebyId(imageId[0])
         getImageCutUrl = editImage.getSourceImageCut()
         getImagePlaceholderCut = editImage.getImagePlaceHolderCuts()

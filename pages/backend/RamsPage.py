@@ -1,6 +1,8 @@
 import unittest
 from random import randint
 from string import count
+from classes import worker
+import time
 
 
 class RamsPage(unittest.TestCase):
@@ -21,9 +23,16 @@ class RamsPage(unittest.TestCase):
         #self.driver.get("http://rams-stage.cosmopolitan.com/m.php?t=articles") '''
             
     def getRandomEditorialArticle(self):
+<<<<<<< Updated upstream
         randomString = randint(1000,10000)
+=======
+        #randomString = randint(1,100)
+        randomId = worker.worker()
+        id = randomId.getApiData()
+        time.sleep(2)
+>>>>>>> Stashed changes
         searchBox = self.driver.find_element_by_id("id")
-        searchBox.send_keys(randomString)
+        searchBox.send_keys(id)
         
         
         getResults = self.driver.find_element_by_xpath("//*[@id='results_table']/table/tbody/tr/td[1]")

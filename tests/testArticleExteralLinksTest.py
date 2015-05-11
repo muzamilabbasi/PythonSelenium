@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from classes import seleniumDriver
 from pages.frontend import ArticlePage
 
-class ArticleExternalLinksTest(seleniumDriver.seleniumDriver):
+class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
 
 
     def testArticleBodyExternalLinksTest(self):

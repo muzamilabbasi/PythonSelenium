@@ -41,6 +41,7 @@ class EditorialPage(RamsPage.RamsPage):
         url =  re.findall('url="([^"]+)', innerHTML)
         #if(url == ''):
         #   return False;
+        print url
         return url        
             
         

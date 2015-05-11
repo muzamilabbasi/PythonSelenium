@@ -3,7 +3,7 @@ from pages.backend import AddArticlePage as AP
 from pages.frontend import ArticlePage
 from classes import seleniumDriver
 
-class ArticleGalleryEmbedTest(seleniumDriver.seleniumDriver):
+class testArticleGalleryEmbedTest(seleniumDriver.seleniumDriver):
 
 
     def testArticleGalleryEmbedTest(self):

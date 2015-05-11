@@ -4,7 +4,7 @@ from pages.frontend import ArticlePage
 from pages.backend import Images as editImage
 from classes import seleniumDriver
 
-class ArticleImageEmbedTest(seleniumDriver.seleniumDriver):
+class testArticleImageEmbedTest(seleniumDriver.seleniumDriver):
 
 
     def testArticleImageEmbedTest(self):

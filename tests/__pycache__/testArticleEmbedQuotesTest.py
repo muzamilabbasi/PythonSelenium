@@ -6,7 +6,7 @@ import unittest
 from classes import seleniumDriver
 from pages.backend.AddArticlePage import AddArticlePage
 
-class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
+class ArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
 
     def testArticleFacebookEmbedQuotes(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -42,15 +42,9 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
         getHtmlText = addArticlePage.getHtmlBody()
-<<<<<<< Updated upstream
-        time.sleep(1)
-        self.assertEqual(formattedQuote,getHtmlText, "Text isn't equal")
-        
-=======
         time.sleep(2)
         #self.assertEqual(formattedQuote,getHtmlText, "Text isn't equal")
         assert formattedQuote in getHtmlText
->>>>>>> Stashed changes
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
@@ -148,9 +142,9 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
    
    
-        print articlePage.getVineUrl()
+        #print articlePage.getVineUrl()
         #self.assertEquals(embeddedQuote,'http:'+self.run.getPinterestUrl(), "The quote embedded doesn't appears to be on front end")
-    
+        
     def testArticleVevoEmbedQuotes(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
@@ -236,6 +230,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
         #print videoID
         #print self.run.getMtvVideoID()
+        time.sleep(2)
         self.assertEquals(videoID,articlePage.getMtvVideoID(), "The quote embedded doesn't appears to be on front end")
 
     def testArticleFunnyOrDieEmbedQuotes(self):
@@ -258,7 +253,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         
-        print articlePage.getFunnyOrDieUrl()
+        #print articlePage.getFunnyOrDieUrl()
     
     def testArticlePlayBuzzEmbedQuotes(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -279,7 +274,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
       
-        print articlePage.getPlayBuzzUrl()
+        #print articlePage.getPlayBuzzUrl()
     
     
     def testArticleNYMagEmbedQuotes(self):
@@ -301,7 +296,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
     
-        print articlePage.getNYMAGtitle()
+        #print articlePage.getNYMAGtitle()
    
     def testArticleVogueEmbedQuotes(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -364,7 +359,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEqual(formattedQuote,getHtmlText, "Text isn't equal")
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
-        print articlePage.getTMZID()
+        #print articlePage.getTMZID()
         #assert videoID in self.run.getMediaMattersVideoID()
     
     def testArticleABCVideoEmbedQuotes(self):
@@ -407,7 +402,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         assert formattedQuote in getHtmlText
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
-        print articlePage.getSoundCloudUrl()
+        #print articlePage.getSoundCloudUrl()
         #self.assertEqual(videoID, self.run.getAbcVideoUrl(), "The quote embedded doesn't appears to be visible on frontend")
 
     def testArticleTwiigspollEmbedQuotes(self):
@@ -427,7 +422,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEqual(formattedQuote,getHtmlText, "Text isn't equal")
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
-        print articlePage.getSoundCloudUrl()
+        #print articlePage.getSoundCloudUrl()
        
 if __name__ == "__main__":
     unittest.main()

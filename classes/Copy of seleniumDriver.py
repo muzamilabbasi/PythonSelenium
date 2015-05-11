@@ -9,7 +9,6 @@ from selenium import webdriver
 from configobj import ConfigObj
 from classes import loginController
 import time
-from classes import Result
 
 class seleniumDriver(unittest.TestCase):
    
@@ -44,9 +43,9 @@ class seleniumDriver(unittest.TestCase):
     def tearDown(self):
         self.driver.save_screenshot('screenshot')
         self.endTime = time.time()
-        result = Result.Result()
-        result.save(self)
+        Result.save(self)
         self.driver.quit()
+    
     
     if __name__ == "__main__":
         unittest.main()

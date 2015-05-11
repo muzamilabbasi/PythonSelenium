@@ -17,7 +17,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         currentTime = time.strftime("%H:%M:%S")        
         bodyText = "Default test value"+currentTime
         expectedBodyText = '<strong>'+bodyText+'</strong>'
-        self.driver.save_screenshot("file.png")
+       
         self.AddArticlePage.setArticleBodyText(bodyText)
         self.AddArticlePage.clickWYSIWYGFormatting("bold","body")
         self.assertTrue(self.AddArticlePage.save(), "cannot save an Article")
@@ -33,7 +33,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         print self.run.getBodyTextStyle()
         
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
-    ''''
+   
 
     def testSetFontItalic(self):
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -81,7 +81,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         self.run = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
-    '''
+    
 if __name__ == "__main__":
     unittest.main()
     #suite = unittest.TestLoader().loadTestsFromTestCase(ArticleBodyFormatting)

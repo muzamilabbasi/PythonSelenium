@@ -7,6 +7,7 @@ from numpy.f2py.auxfuncs import throw_error
 
 class testArticleRecipesTest(seleniumDriver.seleniumDriver):
     
+    '''
     def testRecipesTipsDirections(self):
        
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -29,5 +30,5 @@ class testArticleRecipesTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         self.assertEquals('1'+" "+setText,articlePage.getIngredientsOne(), "Ingredients one aren't equal as provided")
         self.assertEquals('1'+" "+setText,articlePage.getIngredientsTwo(), "Ingredients two aren't equal as provided")
-        self.assertEquals(setText,articlePage.getDirectionsText(),"Directions do not match")
+        self.assertEquals(setText,articlePage.getDirectionsText(),"Directions do not match")'''
         

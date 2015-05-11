@@ -5,7 +5,7 @@ from pages.backend import Images as editImage
 from classes import seleniumDriver
 
 class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
-
+    '''
 
     def testRecipeImageEmbedTest(self):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -15,7 +15,7 @@ class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
         imageId = addArticlePage.lightBox("data-imageid")
         addArticlePage.clickOnImageEmbedInsertButton()
         time.sleep(10)
-        '''
+        
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)

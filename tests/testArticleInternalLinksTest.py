@@ -10,7 +10,7 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         addArticlePage.getRandomEditorialArticle()
         addArticlePage.clickBodyInternalLinks()
     
-        addedContentUrl = self.AddArticlePage.lightBox()
+        addedContentUrl = addArticlePage.lightBox()
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
@@ -36,6 +36,8 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         addArticlePage.clickHtmlView(0)
         
         time.sleep(2)
+        print addedContentUrl[0]
+        print addArticlePage.getDekContentUrlStripped()
         self.assertEqual(addedContentUrl[0],addArticlePage.getDekContentUrlStripped(), "The text is not equal")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())

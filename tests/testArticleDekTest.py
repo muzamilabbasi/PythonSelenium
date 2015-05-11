@@ -73,5 +73,5 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
         
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
         
-    if __name__ == "__main__":
+if __name__ == "__main__":
         unittest.main()

@@ -7,8 +7,8 @@ from pages.frontend import ArticlePage
 
 class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
 
-
     def testArticleBodyExternalLinksTest(self):
+        """Practitest id :304"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
             
         addArticlePage.getRandomEditorialArticle()
@@ -35,6 +35,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         assert keys in browserUrl
         
     def testArticleDekExternalLinksTest(self):
+        """Practitest id :305"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         

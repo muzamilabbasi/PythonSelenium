@@ -5,9 +5,10 @@ from pages.backend import Images as editImage
 from classes import seleniumDriver
 
 class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
-    '''
+   
 
     def testRecipeImageEmbedTest(self):
+        """Practitest id :312"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         addArticlePage.clickTipsImageEmbed()
@@ -32,7 +33,7 @@ class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(previewUrl)
         articlePage = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
-        assert articlePage.getimageUrl() in getImagePlaceholderCut or getImageCutUrl'''
+        assert articlePage.getimageUrl() in getImagePlaceholderCut or getImageCutUrl
         
 if __name__ == "__main__":
     unittest.main()

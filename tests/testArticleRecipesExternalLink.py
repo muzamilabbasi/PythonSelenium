@@ -6,9 +6,9 @@ from classes import seleniumDriver
 from pages.frontend import ArticlePage
 
 class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
-   ''' 
-
+  
     def testRecipeDirectionsExternalLinksTest(self):
+        """Practitest id :313"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -48,6 +48,7 @@ class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
         assert keys in urlText 
         
     def testRecipeTipsExternalLinksTest(self):
+        """Practitest id :314"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         

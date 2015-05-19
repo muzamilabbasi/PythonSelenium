@@ -6,6 +6,7 @@ from classes import seleniumDriver
 class ArticlePullQuotesTest(seleniumDriver.seleniumDriver):
 
     def testSetArticlePullQuotes(self):
+        """Practitest id :310"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         

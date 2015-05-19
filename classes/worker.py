@@ -6,7 +6,7 @@ from configobj import ConfigObj
 
 class worker():
     
-    def getApiData(self,):
+    def getApiData(self):
         
         config = ConfigObj('/usr/local/bin/setup.cfg')
         site = config['nosetests']['site']
@@ -36,10 +36,14 @@ class worker():
         makeList = list(html)
         data = ''.join(makeList)
         id = json.loads(data)
-        if (id == " "):
-            return False
-        else:
-            return id["output"]["id"]
+        try:
+            if (id != " "):
+                return id["output"]["id"]
+        except ValueError as e:
+                raise Exception("Cannot return Id's from API")
+                
+            
+            
 
 
 

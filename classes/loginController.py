@@ -12,10 +12,10 @@ class loginController(unittest.TestCase):
     def login(self):
         username = self.driver.find_element_by_id("username")
         username.clear()
-        username.send_keys("")
+        username.send_keys("selenium")
         password = self.driver.find_element_by_id("password")
         password.clear()
-        password.send_keys("")
+        password.send_keys("jkdf8923SDN")
         loginButton = self.driver.find_element_by_xpath("//*[@id='contents']/form/div/button")
         #loginButton = self.driver.find_element_by_xpath("//*[@id='contents']/form/div/p[4]/button")
         loginButton.click()

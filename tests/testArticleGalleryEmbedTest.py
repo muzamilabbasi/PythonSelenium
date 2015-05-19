@@ -5,8 +5,8 @@ from classes import seleniumDriver
 
 class testArticleGalleryEmbedTest(seleniumDriver.seleniumDriver):
 
-
     def testArticleGalleryEmbedTest(self):
+        """Practitest id :306"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         

@@ -32,14 +32,18 @@ class RamsPage(unittest.TestCase):
         
         
         getResults = self.driver.find_element_by_xpath("//*[@id='results_table']/table/tbody/tr/td[1]")
+       
         if (getResults != ''):
             count = 1
             
             #self.driver.get("http://rams-stage.cosmopolitan.com/m.php?t=articles&edit&id="+str(getResults.text))
             
             currentPageUrl = self.driver.current_url
-            loadPage = currentPageUrl+"&edit&id="+str(getResults.text)
+            loadPage = currentPageUrl+"&edit&id="+id
+            
             self.loadUrl(loadPage)
+            #self.driver.get(loadPage)
+          
             #return AddArticlePage.AddArticlePage(self.driver,getResults.text)
         else:
             count = 0

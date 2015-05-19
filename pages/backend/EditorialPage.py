@@ -1,6 +1,7 @@
 import time
 from pages.backend import RamsPage
 import re
+from macpath import join
 
 
 class EditorialPage(RamsPage.RamsPage):
@@ -23,7 +24,7 @@ class EditorialPage(RamsPage.RamsPage):
             return False
         
         element.click()
-        time.sleep(2)
+        time.sleep(3)
        
         if(lastSaveTimeElement.text not in lastSaveTime):
             return True;
@@ -39,10 +40,10 @@ class EditorialPage(RamsPage.RamsPage):
              
         innerHTML =  previewUrlElement.get_attribute('outerHTML')
         url =  re.findall('url="([^"]+)', innerHTML)
+        replaced_url = ''.join(url)
         #if(url == ''):
         #   return False;
-        print url
-        return url        
+        return replaced_url        
             
         
             

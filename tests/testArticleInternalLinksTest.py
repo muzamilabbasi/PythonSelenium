@@ -6,6 +6,7 @@ from classes import seleniumDriver
 class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
 
     def testArticleBodyInternalLinksTest(self):
+        """Practitest id :308"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         addArticlePage.clickBodyInternalLinks()
@@ -26,6 +27,7 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         
     
     def testArticleDekInternalLinksTest(self):
+        """Practitest id :309"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         addArticlePage.clickDekInternalLinks()

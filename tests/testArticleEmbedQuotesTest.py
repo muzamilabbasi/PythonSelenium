@@ -9,6 +9,7 @@ from pages.backend.AddArticlePage import AddArticlePage
 class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
 
     def testArticleFacebookEmbedQuotes(self):
+        """Practitest id :285"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -30,6 +31,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
 
 
     def testArticleTwitterEmbedQuotes(self):
+        """Practitest id :286"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -56,6 +58,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         
 
     def testArticleYoutubeEmbedQuotes(self):
+        """Practitest id :287"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -77,6 +80,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEquals(embeddedQuote,'http:'+self.run.getYoutubeEmbeddedQuoteUrl(), "The quote embedded doesn't appears to be on front end")
        
     def testArticleInstagramEmbedQuotes(self):
+        """Practitest id :288"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -102,6 +106,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         assert embeddedQuote in articlePage.getInstagramUrl()
    
     def testArticlePinterestEmbedQuotes(self):
+        """Practitest id :289"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -124,6 +129,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
        
    
     def testArticleVineEmbedQuotes(self):
+        """Practitest id :290"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -148,6 +154,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         #self.assertEquals(embeddedQuote,'http:'+self.run.getPinterestUrl(), "The quote embedded doesn't appears to be on front end")
         
     def testArticleVevoEmbedQuotes(self):
+        """Practitest id :291"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -170,6 +177,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
    
    
     def testArticleHuluEmbedQuotes(self):
+        """Practitest id :292"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
      
@@ -191,6 +199,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEquals(embeddedQuote,articlePage.getVevoUrl(), "The quote embedded doesn't appears to be on front end")
     
     def testArticleSpotifyEmbedQuotes(self):
+        """Practitest id :293"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -212,6 +221,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
     
     
     def testArticleMTVEmbedQuotes(self):
+        """Practitest id :294"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -236,6 +246,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEquals(videoID,articlePage.getMtvVideoID(), "The quote embedded doesn't appears to be on front end")
 
     def testArticleFunnyOrDieEmbedQuotes(self):
+        """Practitest id :295"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -258,6 +269,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         #print articlePage.getFunnyOrDieUrl()
     
     def testArticlePlayBuzzEmbedQuotes(self):
+        """Practitest id :296"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -280,6 +292,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
     
     
     def testArticleNYMagEmbedQuotes(self):
+        """Practitest id :297"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -301,6 +314,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         #print articlePage.getNYMAGtitle()
    
     def testArticleVogueEmbedQuotes(self):
+        """Practitest id :298"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
        
@@ -321,6 +335,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEquals(embeddedQuote,articlePage.getVogueUrl(),"The quote embedded doesn't appears to be on front end")
     
     def testArticleMediaMattersEmbedQuotes(self):
+        """Practitest id :299"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -344,6 +359,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         assert videoID in articlePage.getMediaMattersVideoID()
     
     def testArticleTMZEmbedQuotes(self):
+        """Practitest id :300"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -365,6 +381,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         #assert videoID in self.run.getMediaMattersVideoID()
     
     def testArticleABCVideoEmbedQuotes(self):
+        """Practitest id :301"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -386,6 +403,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         self.assertEqual(videoID, articlePage.getAbcVideoUrl(), "The quote embedded doesn't appears to be visible on frontend")
 
     def testArticleSoundCloudEmbedQuotes(self):
+        """Practitest id :302"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -408,6 +426,7 @@ class testArticleEmbedQuotesTest(seleniumDriver.seleniumDriver):
         #self.assertEqual(videoID, self.run.getAbcVideoUrl(), "The quote embedded doesn't appears to be visible on frontend")
 
     def testArticleTwiigspollEmbedQuotes(self):
+        """Practitest id :303"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         

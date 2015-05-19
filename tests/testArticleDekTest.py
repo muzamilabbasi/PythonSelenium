@@ -6,8 +6,8 @@ import unittest
 
 class ArticleDekTest(seleniumDriver.seleniumDriver):
 
-
     def testSetFontBold(self):
+        """Practitest id :282"""
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         self.AddArticlePage.getRandomEditorialArticle()
         
@@ -30,6 +30,7 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
     
     def testSetFontItalic(self):
+        """Practitest id :283"""
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         
         self.AddArticlePage.getRandomEditorialArticle()
@@ -52,6 +53,7 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
     
     def testSetFontUnderline(self):
+        """Practitest id :284"""
         self.AddArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         self.AddArticlePage.getRandomEditorialArticle()
         

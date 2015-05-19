@@ -6,8 +6,9 @@ import unittest
 from selenium.webdriver.common import alert
 
 class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
-    '''
+   
     def testSetFontBoldDirections(self):
+        """Practitest id :314"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -32,6 +33,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
     def testSetFontItalicDirections(self):
+        """Practitest id :315"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -56,6 +58,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
     def testSetFontUnderlineDirections(self):
+        """Practitest id :316"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -80,6 +83,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
     def testSetFontBoldTips(self):
+        """Practitest id :317"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -104,6 +108,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
     def testSetFontItalicTips(self):
+        """Practitest id :318"""   
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -129,6 +134,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
     def testSetFontUnderlineTips(self):
+        """Practitest id :319"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
@@ -152,4 +158,4 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
-        '''
+        

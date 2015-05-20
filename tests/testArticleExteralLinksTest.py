@@ -1,9 +1,10 @@
 import time, unittest
 from pages.backend import AddArticlePage as AP
-from classes import PageActions
+
 from selenium.webdriver.common.by import By
 from classes import seleniumDriver
 from pages.frontend import ArticlePage
+
 
 class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
 
@@ -19,7 +20,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         alert = self.driver.switch_to_alert()
         alert.send_keys(keys)
         alert.accept()
-        alert.accept()
+        #alert.accept()
         
         addArticlePage.save()
         self.driver.refresh()
@@ -33,7 +34,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
-        
+    '''
     def testArticleDekExternalLinksTest(self):
         """Practitest id :305"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -62,6 +63,6 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
-
+    '''
 if __name__ == "__main__":
     unittest.main()

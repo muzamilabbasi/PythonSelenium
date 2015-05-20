@@ -6,7 +6,7 @@ import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
-from numpy.f2py.auxfuncs import throw_error
+from selenium.webdriver import ActionChains as actions
 
 
 class AddArticlePage(EditorialPage.EditorialPage):
@@ -44,17 +44,19 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def clickWYSIWYGFormatting(self,format,region = 'Dek'):
         if (region == 'Dek'):
             articleBodyText = self.getArticleDekBody()
-            articleBodyText.send_keys(Keys.CONTROL,'A')
+            articleBodyText.send_keys(Keys.CONTROL,'a')
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[0].click()
+            time.sleep(1)
         
         elif (region == "body"):
             articleDek = self.getArticleBody()
-            articleDek.send_keys(Keys.CONTROL,'A')
+            articleDek.send_keys(Keys.CONTROL,'a')
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[1].click()
+            time.sleep(1)
         
         elif (region == "directions"):
             directionsBody = self.getDirectionsBody()
@@ -78,7 +80,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
         return self.driver.find_element_by_xpath("//*[@id='body']").text
     
     def getBodyToolbar(self):
-        return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div/span")
+        return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div")
     
     def getArticleDekHTML(self):
         return self.driver.find_element_by_xpath("//*[@id='sub_heading']").text

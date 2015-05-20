@@ -6,7 +6,10 @@ import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
+<<<<<<< HEAD
 from selenium.webdriver import ActionChains as actions
+=======
+>>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
 
 
 class AddArticlePage(EditorialPage.EditorialPage):
@@ -60,7 +63,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
         elif (region == "directions"):
             directionsBody = self.getDirectionsBody()
-            directionsBody.send_keys(Keys.CONTROL,'A')
+            directionsBody.send_keys(Keys.CONTROL,'a')
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[2].click()
@@ -354,9 +357,9 @@ class AddArticlePage(EditorialPage.EditorialPage):
         articleBody.clear()
         
         toolbar = self.getBodyToolbar()
-        
         if (toolbar is None):
             return False
+        time.sleep(7)
         toolbar[6].click()
         
         textBox = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")

@@ -8,7 +8,7 @@ class worker():
     
     def getApiData(self):
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
         site = config['nosetests']['site']
         env = config['nosetests']['environment']
         environment = env.replace("stage","staging")

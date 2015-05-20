@@ -19,9 +19,14 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         self.pageAction = PageActions.PageActions(self.driver)
         alert = self.driver.switch_to_alert()
         alert.send_keys(keys)
+<<<<<<< HEAD
         alert.accept()
         #alert.accept()
+=======
+>>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
         
+        alert.accept()
+        time.sleep(5)
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
@@ -34,7 +39,11 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
+<<<<<<< HEAD
     '''
+=======
+    '''    
+>>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
     def testArticleDekExternalLinksTest(self):
         """Practitest id :305"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -62,7 +71,12 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         self.pageAction.switchNewWindows(By.XPATH, "//*[@id='site-wrapper']/article/header/h2/a")
         time.sleep(2)
         browserUrl = self.driver.current_url
+<<<<<<< HEAD
         assert keys in browserUrl
     '''
+=======
+        assert keys in browserUrl'''
+
+>>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
 if __name__ == "__main__":
     unittest.main()

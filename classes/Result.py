@@ -26,8 +26,8 @@ class Result():
         data['startTime'] = test.startTime
         data['endTime'] = test.endTime
        
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         data['browser'] =  config['nosetests']['browser']
         data['environment'] = config['nosetests']['environment']
         data['site'] = config['nosetests']['site']
@@ -43,9 +43,11 @@ class Result():
             data['passed'] = 0
             
         elif (self.fails == '0'):
+            print "IAM THIS BEING USED NOW"
             data['passed'] = 1
             
         elif(self.fails == '1'):
+            print "OLLa Me Failed"
             data['status'] = 0
             
         elif(self.errors == '1'):
@@ -53,6 +55,7 @@ class Result():
         
         data['message'] = ''
         data['screenshot'] = "../screenshot.png"
+        data['testset_id'] = 38
         return data;
         
     def send(self,result): 

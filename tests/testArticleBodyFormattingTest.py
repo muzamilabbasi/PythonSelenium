@@ -32,6 +32,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         self.AddArticlePage.loadUrl(previewUrl)
         self.run = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
+        print expectedBodyText
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
         
    
@@ -45,7 +46,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         #self.AddArticlePage = AP.AddArticlePage(self.driver)
         
         currentTime = time.strftime("%H:%M:%S")        
-        bodyText = "Default tt value"+currentTime
+        bodyText = "Default test value"+currentTime
         expectedBodyText = '<em>'+bodyText+'</em>'
         
         self.AddArticlePage.setArticleBodyText(bodyText)
@@ -58,7 +59,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         
         self.AddArticlePage.loadUrl(self.AddArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
-        time.sleep(2)
+        time.sleep(3)
         self.assertEqual(expectedBodyText,self.run.getBodyTextStyle(),"Body text didn't matched")
     
     def testSetFontUnderline(self):
@@ -69,7 +70,7 @@ class testsArticleBodyFormattingTests(seleniumDriver.seleniumDriver):
         self.AddArticlePage.getRandomEditorialArticle()
         
         currentTime = time.strftime("%H:%M:%S")        
-        bodyText = "Default tt value"+currentTime
+        bodyText = "Default test value"+currentTime
         expectedBodyText = '<u>'+bodyText+'</u>'
         
         self.AddArticlePage.setArticleBodyText(bodyText)

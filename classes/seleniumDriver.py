@@ -7,7 +7,7 @@ This file sets up the driver & tears it down...
 import unittest
 from selenium import webdriver
 from configobj import ConfigObj
-from classes import loginController, HTMLTestRunner
+from classes import loginController
 import time,sys
 from classes import Result
 from StringIO import StringIO
@@ -41,15 +41,15 @@ class seleniumDriver(unittest.TestCase):
     
     def setUp(self):
         
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         browser = config['nosetests']['browser']
         
         site = config['nosetests']['site']
         env = config['nosetests']['environment']
         
         if (browser == "Chrome"):
-            self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
+            self.driver = webdriver.Chrome('C:\chromedriver')
             
         elif (browser == "Firefox"):
             self.driver = webdriver.Firefox()

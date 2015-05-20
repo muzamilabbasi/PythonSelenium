@@ -15,6 +15,7 @@ class ArticlePage(unittest.TestCase):
         getElements = self.driver.find_elements_by_xpath("//*[@class='article-body--content']/div[2]/p")
         for i in getElements:
             attr = i.get_attribute("innerHTML")
+            print "This is front end Attribute",attr
             return attr
         
     def getArticleDekText(self):

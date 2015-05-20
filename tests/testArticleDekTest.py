@@ -1,7 +1,7 @@
 from pages.backend import AddArticlePage as AP
 from pages.frontend import ArticlePage
 from classes import seleniumDriver
-import time,datetime
+import time
 import unittest
 
 class ArticleDekTest(seleniumDriver.seleniumDriver):

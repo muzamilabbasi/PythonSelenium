@@ -26,8 +26,8 @@ class Result():
         data['startTime'] = test.startTime
         data['endTime'] = test.endTime
        
-        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        #config = ConfigObj('/usr/local/bin/setup.cfg')
+        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        config = ConfigObj('/usr/local/bin/setup.cfg')
         data['browser'] =  config['nosetests']['browser']
         data['environment'] = config['nosetests']['environment']
         data['site'] = config['nosetests']['site']

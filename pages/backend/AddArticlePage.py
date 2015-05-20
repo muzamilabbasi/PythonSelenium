@@ -6,10 +6,7 @@ import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
-<<<<<<< HEAD
-from selenium.webdriver import ActionChains as actions
-=======
->>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
+
 
 
 class AddArticlePage(EditorialPage.EditorialPage):
@@ -292,8 +289,8 @@ class AddArticlePage(EditorialPage.EditorialPage):
         lightBoxSearch = self.driver.find_elements_by_xpath("//*[@id='searchInputResultsInner']/div")
         if (lightBoxSearch == " "):
             return False
-        
-        randomContent = randint(0,len(lightBoxSearch))
+        #len(lightBoxSearch)
+        randomContent = randint(0,2)
         
         getContentUrl = lightBoxSearch[randomContent].get_attribute(type) 
         getContentTitle = lightBoxSearch[randomContent].get_attribute("data-title")
@@ -408,7 +405,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             if option.text == type:
                 option.click()
             else:
-                throw_error("Error")
+                print "Error Dude"
         
     
     def getIngredients(self):
@@ -450,25 +447,4 @@ class AddArticlePage(EditorialPage.EditorialPage):
         tipsTextBox.clear()
         tipsTextBox.send_keys(text)
         
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
-        
-                

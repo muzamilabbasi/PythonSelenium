@@ -1,7 +1,6 @@
 from pages.backend import EditorialPage
 
 class Images(EditorialPage.EditorialPage):
-
     
     def __init__(self,driver,loadPage = ""):
         self.loadPage = loadPage

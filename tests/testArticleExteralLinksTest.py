@@ -4,7 +4,7 @@ from pages.backend import AddArticlePage as AP
 from selenium.webdriver.common.by import By
 from classes import seleniumDriver
 from pages.frontend import ArticlePage
-
+from pages.backend import PageActions
 
 class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
 
@@ -17,17 +17,17 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         keys = "https://www.google.com/?gws_rd=ssl"
         addArticlePage.clickBodyExternalLinks()
         self.pageAction = PageActions.PageActions(self.driver)
-        alert = self.driver.switch_to_alert()
+        alert = self.driver.switch_to.alert
+        
         alert.send_keys(keys)
-<<<<<<< HEAD
-        alert.accept()
-        #alert.accept()
-=======
->>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
+        print alert
         
         alert.accept()
+        alert.dismiss()
+        
+            
         time.sleep(5)
-        addArticlePage.save()
+        self.assertTrue(self.AddArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
         self.assertEqual(keys,addArticlePage.getContentUrlStripped(), "The text is not equal")
@@ -39,11 +39,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
-<<<<<<< HEAD
     '''
-=======
-    '''    
->>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
     def testArticleDekExternalLinksTest(self):
         """Practitest id :305"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -71,12 +67,8 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         self.pageAction.switchNewWindows(By.XPATH, "//*[@id='site-wrapper']/article/header/h2/a")
         time.sleep(2)
         browserUrl = self.driver.current_url
-<<<<<<< HEAD
-        assert keys in browserUrl
-    '''
-=======
         assert keys in browserUrl'''
 
->>>>>>> 8875f2d92ccf847006854ced3895e4e96313031f
+
 if __name__ == "__main__":
     unittest.main()

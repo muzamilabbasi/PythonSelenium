@@ -48,6 +48,7 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         articlePage.clickDekInternalLinkContent()
         time.sleep(2)
         browserUrl = self.driver.current_url
+        print browserUrl
         assert addedContentUrl[0] in browserUrl
         
 if __name__ == "__main__":

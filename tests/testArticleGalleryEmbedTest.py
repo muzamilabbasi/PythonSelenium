@@ -24,7 +24,7 @@ class testArticleGalleryEmbedTest(seleniumDriver.seleniumDriver):
         previewUrl = addArticlePage.getPreviewUrl()
         addArticlePage.loadUrl(previewUrl)
         articlePage = ArticlePage.ArticlePage(self.driver)
-        time.sleep(2)
+        time.sleep(3)
         assert dataId[1] in articlePage.getGalleryShortTitle()
         
 if __name__ == "__main__":

@@ -39,7 +39,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
-    '''
+    
     def testArticleDekExternalLinksTest(self):
         """Practitest id :305"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -67,7 +67,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         self.pageAction.switchNewWindows(By.XPATH, "//*[@id='site-wrapper']/article/header/h2/a")
         time.sleep(2)
         browserUrl = self.driver.current_url
-        assert keys in browserUrl'''
+        assert keys in browserUrl
 
 
 if __name__ == "__main__":

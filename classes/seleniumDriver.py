@@ -63,14 +63,14 @@ class seleniumDriver(unittest.TestCase):
         self.driver.implicitly_wait(10)    
         self.login = loginController.loginController(self.driver)
         self.login.login()
-        self.driver.maximize_window()
+        #self.driver.maximize_window()
         self.startTime = time.time()
         return self.driver
     
     def tearDown(self):
         result_list = []
         
-        self.driver.save_screenshot('screenshot')
+        self.driver.save_screenshot('../screenshot/failureScreenshot.png')
         self.endTime = time.time()
         result = self._resultForDoCleanups
         resultString = str(result)

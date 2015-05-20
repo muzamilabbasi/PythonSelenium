@@ -6,6 +6,7 @@ import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 
@@ -79,8 +80,11 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def getHtmlBody(self):
         return self.driver.find_element_by_xpath("//*[@id='body']").text
     
-    def getBodyToolbar(self):
+    def getBodyToolbarNoSpan(self):
         return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div")
+    
+    def getBodyToolbar(self):
+        return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div/span")
     
     def getArticleDekHTML(self):
         return self.driver.find_element_by_xpath("//*[@id='sub_heading']").text
@@ -98,7 +102,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False;
             
         articleBody.clear()
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         
         if (toolbar is None):
             return False
@@ -122,7 +126,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[3].click()
@@ -136,7 +140,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[1].click()
@@ -176,7 +180,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[1].click()
@@ -190,7 +194,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[3].click()
@@ -284,8 +288,10 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def lightBox(self,type = "data-url"):
         
         lightBox = self.driver.find_element_by_id("lightbox")
+        
         if (lightBox is None):
             return False
+            
         lightBoxSearch = self.driver.find_elements_by_xpath("//*[@id='searchInputResultsInner']/div")
         if (lightBoxSearch == " "):
             return False
@@ -353,7 +359,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyEmbededQuotesToolbar()
         if (toolbar is None):
             return False
         time.sleep(7)
@@ -369,24 +375,32 @@ class AddArticlePage(EditorialPage.EditorialPage):
         dropDownList.find_element_by_xpath("//option[@value='"+type+"']").click()    
         
     def clickOnImageEmbedInsertButton(self):
-        getButton = self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[2]/div[3]/div[3]/div/button")
+        '''getButton = self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[2]/div[3]/div[3]/div/button")
         if (getButton is None):
             return False
-        getButton.click()
+        getButton.click()'''
+        clickInsertButton = "$('.popup_imageInsertButton').click()"
+        self.driver.execute_script(clickInsertButton)
         
     def getImageId(self):
         getBodytext = self.getHtmlBody()
         replaceStr = getBodytext.replace('loc="C"',"").replace('share="true"',"").replace('expand="true"',"").replace("image id=","").replace("[","").replace("]","").replace('"',"")
         return replaceStr
     
-    def clickOnGalleryEmbedInsertButton(self,number = 0):
-        getButton = self.driver.find_elements_by_xpath("//*[@id='popup_galleryRight']/button")
-        if (getButton == " "):
+    def clickOnGalleryEmbedInsertButton(self):
+        getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
+        #("//*[@id='popup_galleryRight']")
+        print getButton
+        if (getButton is None):
+            print "ME"
             return False
-        #print "ClickButton"
-        getButton[number].click()
+        print "Button should be clicked"
+        ActionChains(self.driver).move_to_element_with_offset(getButton, 0, 20).click().perform()
+        
         #embedButton = '$("#popup_galleryRight").eq(1).click()'
         #self.driver.execute_script(embedButton)
+        #embedGalleryButton = "('.popup_galleryInsertButton').click()"
+        #self.driver.execute_script(embedGalleryButton)
         
         
     def getGalleryId(self):

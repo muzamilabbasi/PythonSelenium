@@ -23,6 +23,7 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         articlePage.clickInternalLinkContent()
         time.sleep(2)
         browserUrl = self.driver.current_url
+        print browserUrl
         assert addedContentUrl[0] in browserUrl
         
     
@@ -46,8 +47,9 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
         
         articlePage.clickDekInternalLinkContent()
-        time.sleep(2)
+        time.sleep(3)
         browserUrl = self.driver.current_url
+        print addedContentUrl[0]
         print browserUrl
         assert addedContentUrl[0] in browserUrl
         

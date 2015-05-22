@@ -1,11 +1,20 @@
 from pages.backend import EditorialPage
+from configobj import ConfigObj
 
 class Images(EditorialPage.EditorialPage):
     
     def __init__(self,driver,loadPage = ""):
         self.loadPage = loadPage
         self.driver = driver
-        self.driver.get("http://rams-stage.cosmopolitan.com/img.php")
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        site = config['nosetests']['site']
+        env = config['nosetests']['environment']
+        self.driver.get("http://rams-stage."+site+".com/img.php")
+        
+        
+          
+        
+        #self.driver.get("http://rams-stage.cosmopolitan.com/img.php")
         #EditorialPage.EditorialPage.__init__(self,driver,loadPage)
         
     def searchImagebyId(self,id = 1):

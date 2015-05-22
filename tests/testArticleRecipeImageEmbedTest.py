@@ -5,7 +5,7 @@ from pages.backend import Images as editImage
 from classes import seleniumDriver
 
 class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
-   
+   '''
 
     def testRecipeImageEmbedTest(self):
         """Practitest id :312"""
@@ -34,6 +34,6 @@ class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
         time.sleep(2)
         assert articlePage.getimageUrl() in getImagePlaceholderCut or getImageCutUrl
-        
+    ''' 
 if __name__ == "__main__":
     unittest.main()

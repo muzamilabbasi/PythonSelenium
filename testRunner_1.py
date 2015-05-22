@@ -16,17 +16,17 @@ if __name__ == '__main__':
     
     if(args.processes != " "):
             #file = open("/usr/local/bin/setup.cfg", "w")
-            file = open("C:\Python27\Scripts\PythonSelenium\setup.cfg", "w")
+            file = open("C:/setup.cfg", "w")
             #file = open("/Users/mabassi/Documents/workspace/newProj/tests/setup.cfg", "w")
             file.write("[nosetests]\n")
             file.write("browser = \""+args.browser+"\"\n")
             file.write("site = \""+args.site+"\"\n")
             file.write("environment = \""+args.env+"\"\n")
             file.close()
-            os.system("nosetests --processes="+args.processes+" "+"--process-timeout="+args.ptimeout+" "+"PythonSelenium\tests")
+            os.system("nosetests --processes="+args.processes+" "+"--process-timeout="+args.ptimeout+" "+"tests")
     else:
         #file = open("/usr/local/bin/setup.cfg", "w")
-        file = open("C:\Python27\Scripts\PythonSelenium\setup.cfg", "w")
+        file = open("C:/setup.cfg", "w")
         #file = open("/Users/mabassi/Documents/workspace/newProj/tests/setup.cfg", "w")
         file.write("[nosetests]\n")
         file.write("browser = \""+args.browser+"\"\n")
@@ -36,4 +36,4 @@ if __name__ == '__main__':
         
         #print os.path.expanduser(path)
         #call(["nosetests","\tests"])
-        os.system("nosetests PythonSelenium\tests")
+        os.system("nosetests tests")

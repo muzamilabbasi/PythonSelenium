@@ -26,8 +26,8 @@ class Result():
         data['startTime'] = test.startTime
         data['endTime'] = test.endTime
        
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         data['browser'] =  config['nosetests']['browser']
         data['environment'] = config['nosetests']['environment']
         data['site'] = config['nosetests']['site']
@@ -39,23 +39,44 @@ class Result():
         data['id'] = dataid.replace("Practitest id :","")
         data['url'] = test.driver.current_url    
         
+        print self.fails 
+        if (self.fails == None):
+            print "If and None"
+            data['passed'] = 1
+            
+        elif(self.fails  != None):
+            print "elif"
+            data['passed'] = 0
+        else:
+            
+            print "Else"
+            data['passed'] = 0
+        
+        
+        ''' 
+            
+        
         if(self.fails > '1' and self.run > '1'):
+            print "I am going on dude"
+            self.fail = 1
             data['passed'] = 0
             
         elif (self.fails == '0'):
+            print self.fails
             print "IAM THIS BEING USED NOW"
             data['passed'] = 1
             
         elif(self.fails == '1'):
+            print self.fails
             print "OLLa Me Failed"
             data['status'] = 0
             
         elif(self.errors == '1'):
             data['passed'] = 0
-        
+        '''
         data['message'] = ''
         data['screenshot'] = "../screenshot.png"
-        data['testset_id'] = 38
+        data['testset_id'] = 43
         return data;
         
     def send(self,result): 

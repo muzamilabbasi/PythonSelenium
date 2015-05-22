@@ -359,7 +359,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             
         articleBody.clear()
         
-        toolbar = self.getBodyEmbededQuotesToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         time.sleep(7)
@@ -388,7 +388,8 @@ class AddArticlePage(EditorialPage.EditorialPage):
         return replaceStr
     
     def clickOnGalleryEmbedInsertButton(self):
-        getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
+        #getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
+        getButton = self.driver.find_element_by_css_selector("html body div#wrapper.wrapper.templates-present div#contents form.article_form.general_form div.table div.tablerow div.tablecell_rightnav div#body_box.segment div.panel.shaded div.row.article_body div.wysiwyg-toolbar.js-wysiwyg-toolbar div.toolbar-group div.toolbar-btn.btn-popup.rams-icon.rams-icon-gallery.active div.wysiwyg-popup.wysiwyg-popup-embed-gallery div#popup_galleryRight button.popup_galleryInsertButton.white")
         #("//*[@id='popup_galleryRight']")
         print getButton
         if (getButton is None):

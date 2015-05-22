@@ -6,7 +6,7 @@ from classes import seleniumDriver
 from pages.frontend import ArticlePage
 
 class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
-  
+    '''
     def testRecipeDirectionsExternalLinksTest(self):
         """Practitest id :313"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -84,7 +84,7 @@ class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
         #need to get tips text on front end
         #urlText = articlePage
         #assert keys in urlText'''
-
+    
 
 if __name__ == "__main__":
     unittest.main()

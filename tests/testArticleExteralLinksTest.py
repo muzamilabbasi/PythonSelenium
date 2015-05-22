@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from classes import seleniumDriver
 from pages.frontend import ArticlePage
 from pages.backend import PageActions
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoAlertPresentException
 
 class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
 
@@ -17,19 +20,19 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         keys = "https://www.google.com/?gws_rd=ssl"
         addArticlePage.clickBodyExternalLinks()
         self.pageAction = PageActions.PageActions(self.driver)
+        
         alert = self.driver.switch_to.alert
         
         alert.send_keys(keys)
-        print alert
-        
+       
         alert.accept()
-        alert.dismiss()
-        
+        alert.accept()
             
-        time.sleep(5)
-        self.assertTrue(self.AddArticlePage.save(), "cannot save an Article")
+        
+        self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
+        time.sleep(2)
         self.assertEqual(keys,addArticlePage.getContentUrlStripped(), "The text is not equal")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
@@ -52,10 +55,9 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         alert = self.driver.switch_to_alert()
         alert.send_keys(keys)
         alert.accept()
-        alert.send_keys(keys)
         alert.accept()
         
-        addArticlePage.save()
+        self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(0)
         
@@ -68,7 +70,7 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
-
+    
 
 if __name__ == "__main__":
     unittest.main()

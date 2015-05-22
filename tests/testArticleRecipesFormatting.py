@@ -6,7 +6,7 @@ import unittest
 from selenium.webdriver.common import alert
 
 class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
-   
+   '''
     def testSetFontBoldDirections(self):
         """Practitest id :314"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -159,3 +159,5 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
         articlePage = ArticlePage.ArticlePage(self.driver)
         self.assertEquals(expectedText,articlePage.getDirectionsTextInnerHtml(),"The Expected Text Didn't Matched")
         
+        
+        '''

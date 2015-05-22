@@ -5,7 +5,7 @@ import time,datetime
 import unittest
 
 class testArticleRecipesTest(seleniumDriver.seleniumDriver):
-    
+    '''
     def testRecipesTipsDirections(self):
         """Practitest id :322"""
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
@@ -29,4 +29,4 @@ class testArticleRecipesTest(seleniumDriver.seleniumDriver):
         self.assertEquals('1'+" "+setText,articlePage.getIngredientsOne(), "Ingredients one aren't equal as provided")
         self.assertEquals('1'+" "+setText,articlePage.getIngredientsTwo(), "Ingredients two aren't equal as provided")
         self.assertEquals(setText,articlePage.getDirectionsText(),"Directions do not match")
-        
+    '''    

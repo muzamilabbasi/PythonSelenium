@@ -41,15 +41,15 @@ class seleniumDriver(unittest.TestCase):
     
     def setUp(self):
         
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         browser = config['nosetests']['browser']
         
         site = config['nosetests']['site']
         env = config['nosetests']['environment']
         
         if (browser == "Chrome"):
-            self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
+            self.driver = webdriver.Chrome('c:\chromedriver')
             
         elif (browser == "Firefox"):
             self.driver = webdriver.Firefox()
@@ -72,15 +72,23 @@ class seleniumDriver(unittest.TestCase):
         
         self.driver.save_screenshot('../screenshot/failureScreenshot.png')
         self.endTime = time.time()
-        result = self._resultForDoCleanups
+        '''result = self._resultForDoCleanups
         resultString = str(result)
        
         run =  resultString[45:46]
         errors = resultString[54:55]
         fails = resultString[65:66]
         
-        result_list = [run,errors,fails]
-        result = Result.Result(result_list)
+        '''
+        result = sys.exc_info()
+        
+    
+        
+        #result_list = [run,errors,fails]
+        
+        
+        #print result_list
+        result = Result.Result(result)
         result.save(self)
         time.sleep(20)
         self.driver.quit()

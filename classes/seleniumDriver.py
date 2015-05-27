@@ -41,8 +41,8 @@ class seleniumDriver(unittest.TestCase):
     
     def setUp(self):
         
-        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        #config = ConfigObj('/usr/local/bin/setup.cfg')
+        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        config = ConfigObj('/usr/local/bin/setup.cfg')
         browser = config['nosetests']['browser']
         
         site = config['nosetests']['site']
@@ -54,22 +54,47 @@ class seleniumDriver(unittest.TestCase):
         elif (browser == "Firefox"):
             self.driver = webdriver.Firefox()
         
-        #elif (browser == "PhantomJs"):
-         #   self.driver = webdriver.PhantomJS('../phantomjs-1.9.2-macosx/bin/phantomjs')
-            
+        elif (browser == "PhantomJs"):
+            self.driver = webdriver.PhantomJS('../phantomjs-1.9.2-macosx/bin/phantomjs')
+        else:
+            raise Exception("Define your browser") 
         
         url = 'https://rams-'+env+'.'+site+'.com'
         self.driver.get(url)
         self.driver.implicitly_wait(10)    
         self.login = loginController.loginController(self.driver)
         self.login.login()
-        #self.driver.maximize_window()
+        self.driver.maximize_window()
         self.startTime = time.time()
+        
         return self.driver
+    
+    '''def setUp(self):
+        desired_cap = {'browser': 'Firefox', 'browser_version': '32.0', 'os': 'OS X', 'os_version': 'Yosemite', 'resolution': '1024x768' , 'browserstack.local': True}
+
+        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        config = ConfigObj('/usr/local/bin/setup.cfg')
+        browser = config['nosetests']['browser']
+        site = config['nosetests']['site']
+        env = config['nosetests']['environment']
+
+
+        self.driver = webdriver.Remote(command_executor='http://muzamilabbasi1:hViA1ywjK1FHK41d46d9@hub.browserstack.com:80/wd/hub',
+        desired_capabilities=desired_cap)
+        
+        
+        self.driver.implicitly_wait(10)
+        url = 'https://rams-'+env+'.'+site+'.com'
+        self.driver.get(url)
+        self.login = loginController.loginController(self.driver)
+        self.login.login()
+        self.driver.maximize_window()
+        self.startTime = time.time()
+        return self.driver'''
+    
     
     def tearDown(self):
         result_list = []
-        
         self.driver.save_screenshot('../screenshot/failureScreenshot.png')
         self.endTime = time.time()
         '''result = self._resultForDoCleanups
@@ -81,11 +106,7 @@ class seleniumDriver(unittest.TestCase):
         
         '''
         result = sys.exc_info()
-        
-    
-        
         #result_list = [run,errors,fails]
-        
         
         #print result_list
         result = Result.Result(result)

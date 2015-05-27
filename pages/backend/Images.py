@@ -6,7 +6,8 @@ class Images(EditorialPage.EditorialPage):
     def __init__(self,driver,loadPage = ""):
         self.loadPage = loadPage
         self.driver = driver
-        config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
+        config = ConfigObj('/usr/local/bin/setup.cfg')
         site = config['nosetests']['site']
         env = config['nosetests']['environment']
         self.driver.get("http://rams-stage."+site+".com/img.php")

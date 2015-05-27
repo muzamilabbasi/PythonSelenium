@@ -1,12 +1,14 @@
 
 import time
 from pages.backend import EditorialPage
+from classes import PageActions as pgactions
 from random import randint
 import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 
 
 
@@ -15,27 +17,27 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def __init__(self,driver,loadPage = " "):
         self.loadPage = loadPage
         EditorialPage.EditorialPage.__init__(self,driver,loadPage)
-     
-
-    def getArticleBody(self):
-        time.sleep(2)
-        return self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[3]")
+        self.pgActions_ = pgactions.PageActions(self.driver)
         
-        #script = self.driver.execute_script("$('#body').prev()")
-        #print script
-        #return script 
-    
+        
+    def getArticleBody(self):
+        body = "//*[@id='body_box']/div[2]/div/div[3]"
+        checkArticleBody_ = self.pgActions_.assert_elementPresent(By.XPATH,body)
+        if (checkArticleBody_ is None):
+            return False
+        return self.pgActions_.find_ElementByXpath(body)
+        
     def setArticleBodyText(self,text):
         articleBodyText = self.getArticleBody()
         articleBodyText.clear()
         articleBodyText.send_keys(text)
         
     def getArticleDekBody(self):
-        articleDek = self.driver.find_element_by_xpath("//*[@class='row sub_heading_div']/div[2]")
-        if (articleDek is None):
+        dek = "//*[@class='row sub_heading_div']/div[2]"
+        checkArticleDek_ = self.pgActions_.assert_elementPresent(By.XPATH,dek) 
+        if (checkArticleDek_ is None):
             return False 
-        time.sleep(2)
-        return articleDek
+        return self.pgActions_.find_ElementByXpath(dek)
     
     def setArticleDekText(self,text):
         articleDek = self.getArticleDekBody()
@@ -45,19 +47,23 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def clickWYSIWYGFormatting(self,format,region = 'Dek'):
         if (region == 'Dek'):
             articleBodyText = self.getArticleDekBody()
-            articleBodyText.send_keys(Keys.CONTROL,'a')
-            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
-            time.sleep(2)
-            formatting[0].click()
-            time.sleep(1)
-        
+            articleBodyText.send_keys(Keys.CONTROL,'A')
+            checkFormatting = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@data-command-name='"+format+"']")
+            if (checkFormatting is True):
+                formatting = self.pgActions_.find_ElementsByXpath("//*[@data-command-name='"+format+"']")
+                formatting[0].click()
+            else:
+                raise Exception("Element Not Visible")
+            
         elif (region == "body"):
-            articleDek = self.getArticleBody()
-            articleDek.send_keys(Keys.CONTROL,'a')
-            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
-            time.sleep(2)
-            formatting[1].click()
-            time.sleep(1)
+            articleBody = self.getArticleBody()
+            articleBody.send_keys(Keys.CONTROL,'A')
+            checkFormatting = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@data-command-name='"+format+"']")
+            if (checkFormatting is True):
+                formatting = self.pgActions_.find_ElementsByXpath("//*[@data-command-name='"+format+"']")
+                formatting[1].click()
+            else:
+                raise Exception("Element Not Visible")
         
         elif (region == "directions"):
             directionsBody = self.getDirectionsBody()
@@ -75,6 +81,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
     def clickHtmlView(self,num=1):
         htmlButton = self.driver.find_elements_by_xpath('//*[@class="toolbar-right"]/button[2]')
+        
         htmlButton[num].click()
         
     def getHtmlBody(self):
@@ -255,8 +262,6 @@ class AddArticlePage(EditorialPage.EditorialPage):
         if (toolbar is None):
             return False
         toolbar[8].click()
-        
-        
         #internalLink = '$(".js-insert-internal-link").click()'
         #self.driver.execute_script(internalLink)    
     def clickTipsGalleryEmbed(self):
@@ -362,17 +367,25 @@ class AddArticlePage(EditorialPage.EditorialPage):
         toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
-        time.sleep(7)
         toolbar[6].click()
         
-        textBox = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
-        if (textBox is None):
+        checkTextBox = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
+        
+        if (checkTextBox is False):
             return False;
+        textBox = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
         textBox.clear()
         textBox.send_keys(text)
         
-        dropDownList = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
-        dropDownList.find_element_by_xpath("//option[@value='"+type+"']").click()    
+        #dropDownList = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
+        dropDownList = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
+        
+        if (dropDownList is False):
+            return False
+        
+        dropDownListClick = self.pgActions_.find_ElementByXpath("//option[@value='"+type+"']")
+        #.find_element_by_xpath("//option[@value='"+type+"']").click()    
+        dropDownListClick.click()
         
     def clickOnImageEmbedInsertButton(self):
         '''getButton = self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[2]/div[3]/div[3]/div/button")
@@ -388,16 +401,14 @@ class AddArticlePage(EditorialPage.EditorialPage):
         return replaceStr
     
     def clickOnGalleryEmbedInsertButton(self):
-        #getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
-        getButton = self.driver.find_element_by_css_selector("html body div#wrapper.wrapper.templates-present div#contents form.article_form.general_form div.table div.tablerow div.tablecell_rightnav div#body_box.segment div.panel.shaded div.row.article_body div.wysiwyg-toolbar.js-wysiwyg-toolbar div.toolbar-group div.toolbar-btn.btn-popup.rams-icon.rams-icon-gallery.active div.wysiwyg-popup.wysiwyg-popup-embed-gallery div#popup_galleryRight button.popup_galleryInsertButton.white")
+        getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
+        #getButton = self.driver.find_element_by_css_selector("html body div#wrapper.wrapper.templates-present div#contents form.article_form.general_form div.table div.tablerow div.tablecell_rightnav div#body_box.segment div.panel.shaded div.row.article_body div.wysiwyg-toolbar.js-wysiwyg-toolbar div.toolbar-group div.toolbar-btn.btn-popup.rams-icon.rams-icon-gallery.active div.wysiwyg-popup.wysiwyg-popup-embed-gallery div#popup_galleryRight button.popup_galleryInsertButton.white")
         #("//*[@id='popup_galleryRight']")
-        print getButton
         if (getButton is None):
             print "ME"
             return False
-        print "Button should be clicked"
-        ActionChains(self.driver).move_to_element_with_offset(getButton, 0, 20).click().perform()
-        
+        getButton.click()
+        #ActionChains(self.driver).move_to_element_with_offset(getButton, 0, 20).click().perform()
         #embedButton = '$("#popup_galleryRight").eq(1).click()'
         #self.driver.execute_script(embedButton)
         #embedGalleryButton = "('.popup_galleryInsertButton').click()"

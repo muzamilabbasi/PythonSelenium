@@ -15,15 +15,15 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
+        time.sleep(1)
         self.assertEqual(addedContentUrl[0],addArticlePage.getContentUrlStripped(), "The text is not equal")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         
         articlePage.clickInternalLinkContent()
-        time.sleep(2)
+        
         browserUrl = self.driver.current_url
-        print browserUrl
         assert addedContentUrl[0] in browserUrl
         
     
@@ -38,19 +38,14 @@ class ArticleInternalLinksTest(seleniumDriver.seleniumDriver):
         self.driver.refresh()
         addArticlePage.clickHtmlView(0)
         
-        time.sleep(2)
-        print addedContentUrl[0]
-        print addArticlePage.getDekContentUrlStripped()
+        time.sleep(1)
         self.assertEqual(addedContentUrl[0],addArticlePage.getDekContentUrlStripped(), "The text is not equal")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         
         articlePage.clickDekInternalLinkContent()
-        time.sleep(3)
         browserUrl = self.driver.current_url
-        print addedContentUrl[0]
-        print browserUrl
         assert addedContentUrl[0] in browserUrl
         
 if __name__ == "__main__":

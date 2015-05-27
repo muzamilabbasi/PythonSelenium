@@ -25,8 +25,6 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
     
         self.AddArticlePage.loadUrl(self.AddArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
-        time.sleep(1)
-        
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
     
     def testSetFontItalic(self):
@@ -49,7 +47,6 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
     
         self.AddArticlePage.loadUrl(self.AddArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
-        time.sleep(1)
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
     
     def testSetFontUnderline(self):
@@ -71,8 +68,6 @@ class ArticleDekTest(seleniumDriver.seleniumDriver):
     
         self.AddArticlePage.loadUrl(self.AddArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
-        time.sleep(1)
-        
         self.assertEqual(bodyText,self.run.getArticleDekText(),"DEK text didn't matched")
         
 if __name__ == "__main__":

@@ -14,13 +14,13 @@ class testArticleImageEmbedTest(seleniumDriver.seleniumDriver):
     
         imageId = addArticlePage.lightBox("data-imageid")
         addArticlePage.clickOnImageEmbedInsertButton()
-        addArticlePage.save()
+        self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
-        time.sleep(2)
+        
         assert imageId[0] in addArticlePage.getImageId()
         previewUrl = addArticlePage.getPreviewUrl()
-        
+        time.sleep(2)
         editImage = editImages.Images(self.driver)
         editImage.searchImagebyId(imageId[0])
         getImageCutUrl = editImage.getSourceImageCut()
@@ -28,7 +28,7 @@ class testArticleImageEmbedTest(seleniumDriver.seleniumDriver):
         
         addArticlePage.loadUrl(previewUrl)
         articlePage = ArticlePage.ArticlePage(self.driver)
-        time.sleep(2)
+        
         assert articlePage.getimageUrl() in getImagePlaceholderCut or getImageCutUrl
         
 if __name__ == "__main__":

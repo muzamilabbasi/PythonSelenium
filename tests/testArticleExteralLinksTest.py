@@ -26,20 +26,18 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         alert.send_keys(keys)
        
         alert.accept()
-        alert.accept()
+        alert.dismiss()
             
         
         self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
-        time.sleep(2)
         self.assertEqual(keys,addArticlePage.getContentUrlStripped(), "The text is not equal")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         self.run = ArticlePage.ArticlePage(self.driver)
         
         self.pageAction.switchNewWindows(By.XPATH, "//*[@class='article-body--content']/div[2]/p/a")
-        time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
     
@@ -52,22 +50,25 @@ class testArticleExternalLinksTest(seleniumDriver.seleniumDriver):
         
         addArticlePage.clickDekExternalLinks()
         self.pageAction = PageActions.PageActions(self.driver)
-        alert = self.driver.switch_to_alert()
+        
+        alert = self.driver.switch_to.alert
+        print alert
         alert.send_keys(keys)
+       
         alert.accept()
-        alert.accept()
+        alert.dismiss()
+            
         
         self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(0)
-        
+        time.sleep(2)
         assert keys in addArticlePage.getDekContentUrlStripped()
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
         
         self.pageAction.switchNewWindows(By.XPATH, "//*[@id='site-wrapper']/article/header/h2/a")
-        time.sleep(2)
         browserUrl = self.driver.current_url
         assert keys in browserUrl
     

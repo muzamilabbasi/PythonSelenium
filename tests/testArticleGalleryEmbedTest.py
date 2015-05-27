@@ -14,19 +14,16 @@ class testArticleGalleryEmbedTest(seleniumDriver.seleniumDriver):
     
         dataId = addArticlePage.lightBox("data-id")
         addArticlePage.clickOnGalleryEmbedInsertButton()
-        addArticlePage.save()
+        self.assertTrue(addArticlePage.save(), "cannot save an Article")
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
         
         assert dataId[0] in addArticlePage.getGalleryId()
         
-        time.sleep(1)
         previewUrl = addArticlePage.getPreviewUrl()
         addArticlePage.loadUrl(previewUrl)
         articlePage = ArticlePage.ArticlePage(self.driver)
-        time.sleep(3)
-        print dataId[1]
-        print articlePage.getGalleryShortTitle()
+        
         assert dataId[1] in articlePage.getGalleryShortTitle()
         
 if __name__ == "__main__":

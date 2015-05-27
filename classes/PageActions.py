@@ -18,7 +18,7 @@ class PageActions(unittest.TestCase):
     '''this function is Waits for an element to be found,'''    
     def assert_elementPresent(self, how, what):
         try:
-            wait = WebDriverWait(self.driver,5)
+            wait = WebDriverWait(self.driver,10)
             wait.until(EC.presence_of_element_located((how,what)))
             return True
         except:
@@ -54,6 +54,11 @@ class PageActions(unittest.TestCase):
     def find_ElementByCssSelector(self,selector):
         return self.driver.find_element_by_css_selector(selector)
     
+    def find_ElementsByXpath(self,selector):
+        return self.driver.find_elements_by_xpath(selector)
+    
+    def find_ElementByXpath(self,selector):
+        return self.driver.find_element_by_xpath(selector)
     
     
     '''page related functions'''

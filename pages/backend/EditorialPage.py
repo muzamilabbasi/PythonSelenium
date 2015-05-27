@@ -2,6 +2,8 @@ import time
 from pages.backend import RamsPage
 import re
 from macpath import join
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 
 
 class EditorialPage(RamsPage.RamsPage):
@@ -24,8 +26,7 @@ class EditorialPage(RamsPage.RamsPage):
             return False
         
         element.click()
-        time.sleep(3)
-       
+        time.sleep(4)
         if(lastSaveTimeElement.text not in lastSaveTime):
             return True;
         else:

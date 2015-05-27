@@ -19,12 +19,12 @@ class ArticlePullQuotesTest(seleniumDriver.seleniumDriver):
         addArticlePage.save()
         self.driver.refresh()
         addArticlePage.clickHtmlView(1)
-        time.sleep(2)
+        
         self.assertEqual(expectedBodyText, addArticlePage.getHtmlBody(),"Pull Quotes Inserted Doesn't matches the Article Body Text")
         
         addArticlePage.loadUrl(addArticlePage.getPreviewUrl())
         articlePage = ArticlePage.ArticlePage(self.driver)
-        time.sleep(2)
+        
         self.assertEqual(bodyText,articlePage.getPullQuoteText(),"Assertion Failed")
         self.assertTrue(articlePage.getPullQuoteIcon,"Pull Quotes Icon Not Visible...")
         

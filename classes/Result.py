@@ -10,7 +10,7 @@ import unittest
 
 class Result(): 
     
-    def __init__(self,mylist = []):
+    def __init__(self,mylist):
         self.run = mylist[0]
         self.errors = mylist[1]
         self.fails = mylist[2]
@@ -26,8 +26,8 @@ class Result():
         data['startTime'] = test.startTime
         data['endTime'] = test.endTime
        
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('../setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         data['browser'] =  config['nosetests']['browser']
         data['environment'] = config['nosetests']['environment']
         data['site'] = config['nosetests']['site']
@@ -39,7 +39,7 @@ class Result():
         data['id'] = dataid.replace("Practitest id :","")
         data['url'] = test.driver.current_url    
         
-        print self.fails 
+        
         if (self.fails == None):
             print "If and None"
             data['passed'] = 1

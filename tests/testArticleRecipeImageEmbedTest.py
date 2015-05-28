@@ -10,7 +10,7 @@ class testArticleRecipeImageEmbedTest(seleniumDriver.seleniumDriver):
     def testRecipeImageEmbedTest(self):
         """Practitest id :312"""
    
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
              

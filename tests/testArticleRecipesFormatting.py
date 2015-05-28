@@ -11,7 +11,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontBoldDirections(self):
         """Practitest id :314"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          
@@ -45,7 +45,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontItalicDirections(self):
         """Practitest id :315"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          
@@ -79,7 +79,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontUnderlineDirections(self):
         """Practitest id :316"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          
@@ -113,7 +113,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontBoldTips(self):
         """Practitest id :317"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          
@@ -147,7 +147,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontItalicTips(self):
         """Practitest id :318"""   
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
         
@@ -182,7 +182,7 @@ class testArticleRecipesFormatting(seleniumDriver.seleniumDriver):
     def testSetFontUnderlineTips(self):
         """Practitest id :319"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
         

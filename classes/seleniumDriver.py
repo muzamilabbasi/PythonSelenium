@@ -38,11 +38,10 @@ class seleniumDriver(unittest.TestCase):
         self.driver.maximize_window()
         self.startTime = time.time()
         return self.driver'''
-    
-    def setUp(self):
         
-        #config = ConfigObj('C:\Python27\Scripts\PythonSelenium\setup.cfg')
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+    def setUp(self):
+        config = ConfigObj('../setup.cfg')
+        #config = ConfigObj('/usr/local/bin/setup.cfg')
         browser = config['nosetests']['browser']
         
         site = config['nosetests']['site']
@@ -67,8 +66,12 @@ class seleniumDriver(unittest.TestCase):
         self.driver.maximize_window()
         self.startTime = time.time()
         
+        
+        
         return self.driver
     
+    
+        
     '''def setUp(self):
         desired_cap = {'browser': 'Firefox', 'browser_version': '32.0', 'os': 'OS X', 'os_version': 'Yosemite', 'resolution': '1024x768' , 'browserstack.local': True}
 
@@ -95,23 +98,29 @@ class seleniumDriver(unittest.TestCase):
     
     def tearDown(self):
         result_list = []
-        self.driver.save_screenshot('../screenshot/failureScreenshot.png')
+        #self.driver.save_screenshot('../screenshots/failureScreenshot')
+        print "TearDown"
+        #read the nosetest.xml file
+        
+        
+        
         self.endTime = time.time()
-        '''result = self._resultForDoCleanups
+        result = self._resultForDoCleanups
         resultString = str(result)
        
         run =  resultString[45:46]
         errors = resultString[54:55]
         fails = resultString[65:66]
         
-        '''
+    
         result = sys.exc_info()
         #result_list = [run,errors,fails]
         
-        #print result_list
+        print self._resultForDoCleanups
         result = Result.Result(result)
         result.save(self)
         time.sleep(20)
+        
         self.driver.quit()
     
     if __name__ == "__main__":

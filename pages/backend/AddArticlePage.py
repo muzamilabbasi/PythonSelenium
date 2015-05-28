@@ -67,7 +67,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
         elif (region == "directions"):
             directionsBody = self.getDirectionsBody()
-            directionsBody.send_keys(Keys.CONTROL,'a')
+            directionsBody.send_keys(Keys.CONTROL,'A')
             formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
             time.sleep(2)
             formatting[2].click()

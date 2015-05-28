@@ -11,7 +11,7 @@ class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
     def testRecipeDirectionsExternalLinksTest(self):
         """Practitest id :313"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          
@@ -60,7 +60,7 @@ class testArticleRecipesExternalLink(seleniumDriver.seleniumDriver):
     def testRecipeTipsExternalLinksTest(self):
         """Practitest id :314"""
         
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
          

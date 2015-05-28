@@ -9,7 +9,7 @@ class testArticleRecipeGalleryEmbedTest(seleniumDriver.seleniumDriver):
     def testRecipeGalleryEmbedTest(self):
         """Practitest id :311"""
     
-        config = ConfigObj('/usr/local/bin/setup.cfg')
+        config = ConfigObj('\..\setup.cfg')
         site = config['nosetests']['site']
         
         if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):

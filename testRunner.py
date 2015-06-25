@@ -15,7 +15,12 @@ if __name__ == '__main__':
     
     
     if(args.processes != " "):
+<<<<<<< Updated upstream
             file = open("/usr/local/bin/setup.cfg", "w")
+=======
+            #file = open("/usr/local/bin/setup.cfg", "w")
+            file = open("C:\setup.cfg", "w")
+>>>>>>> Stashed changes
             #file = open("/Users/mabassi/Documents/workspace/newProj/tests/setup.cfg", "w")
             file.write("[nosetests]\n")
             file.write("browser = \""+args.browser+"\"\n")
@@ -24,7 +29,12 @@ if __name__ == '__main__':
             file.close()
             os.system("nosetests --processes="+args.processes+" "+"--process-timeout="+args.ptimeout+" "+"tests")
     else:
+<<<<<<< Updated upstream
         file = open("/usr/local/bin/setup.cfg", "w")
+=======
+        #file = open("/usr/local/bin/setup.cfg", "w")
+        file = open("C:\setup.cfg", "w")
+>>>>>>> Stashed changes
         #file = open("/Users/mabassi/Documents/workspace/newProj/tests/setup.cfg", "w")
         file.write("[nosetests]\n")
         file.write("browser = \""+args.browser+"\"\n")
@@ -33,4 +43,9 @@ if __name__ == '__main__':
         file.close()
         
         #print os.path.expanduser(path)
+<<<<<<< Updated upstream
         call(["nosetests","tests"])
+=======
+        #call(["nosetests","\tests"])
+        os.system("nosetests tests")
+>>>>>>> Stashed changes

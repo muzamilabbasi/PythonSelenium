@@ -1,82 +1,132 @@
 
 import time
 from pages.backend import EditorialPage
+from classes import PageActions as pgactions
 from random import randint
 import re
 import unittest
 from pages.backend import RamsPage
 from selenium.webdriver.common.keys import Keys
-<<<<<<< Updated upstream
-from numpy.f2py.auxfuncs import throw_error
-=======
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from __builtin__ import True
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from itertools import count
 from classes import helper as helperMethod
-import random
->>>>>>> Stashed changes
 
 
-class AddArticlePage(EditorialPage.EditorialPage):
+
+class AddGalleryPage(EditorialPage.EditorialPage):
     
     def __init__(self,driver,loadPage = " "):
         self.loadPage = loadPage
         EditorialPage.EditorialPage.__init__(self,driver,loadPage)
-<<<<<<< Updated upstream
-     
-
-=======
         self.pgActions_ = pgactions.PageActions(self.driver)
         self.help = helperMethod.helper()
         
+    def getGalleryToolbar(self):
+        toolbar = ".//*[@class='panel gallery-content-buttons']/button"
+        checkGalleryToolbar_ = self.pgActions_.assert_elementPresent(By.XPATH, toolbar)
+        if (checkGalleryToolbar_ is None):
+            raise Exception("Cannot find Toolbar")
+        return self.pgActions_.find_ElementsByXpath(toolbar)
+
+
+    def clickCartToAddItems(self):
+        cartElement = self.getGalleryToolbar()
+        if (cartElement is None):
+            raise Exception("Cannot find Cart on Gallery Page")
+        cartElement[4].click()
         
->>>>>>> Stashed changes
-    def getArticleBody(self):
-        time.sleep(2)
-        return self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[3]")
+    def getGalleryBody(self,num=1):
+        gbody = "//*[@id='images_galleries']/div["+num+"]/div[2]/div[5]/div[2]"
+        checkGalleryBody_ = self.pgActions_.assert_elementPresent(By.XPATH, gbody)
+        if (checkGalleryBody_ is None):
+            raise Exception ("Cannot find Gallery Body")
+        return gbody
         
-        #script = self.driver.execute_script("$('#body').prev()")
-        #print script
-        #return script 
+    def setItemsToCart(self,text,data=[],num=1):
+        headline = self.driver.find_elements_by_xpath(".//*[@class='site_title']")
+        headline[0].send_keys(text)
+        
+        getProductsTextField = self.driver.find_elements_by_xpath("//*[@class='product_slug']")
+        fields = len(getProductsTextField)
+        items = len(data)
+       
+        for i in range(fields):
+            getProductsTextField[i].send_keys(data[i])
+            
+        if (fields < items):
+            insertButton = self.driver.find_elements_by_xpath(".//*[@id='images_galleries']/div["+str(num)+"]/div[2]/div[3]/div/a/i")
+            insertButton[0].click()
+            getProductsTextField = self.driver.find_elements_by_xpath("//*[@class='product_slug']")
+            getProductsTextField[3].send_keys(data[3])
+                   
+        else:
+            raise Exception("A Text field can't be added!")
     
+    def returnSlugData(self):
+        slugData = []
+        getSlugs = self.help.getRandomSlugs() 
+        if (getSlugs == " "):
+            raise Exception("No Slugs Returned")
+            
+        for url in getSlugs:
+            data = url.replace("http://shop.harpersbazaar.com/designers","")
+            slugData.append(data)
+        return slugData
+
+    def checkSlugsInGallery(self,slugData):
+        myList = []
+        gallerySlugs = self.returnProductSlugs()
+        
+        for element in slugData:
+            if element in gallerySlugs:
+                myList.append(element)
+        for i in myList:
+            if i in gallerySlugs:
+                return True
+            else:
+                raise Exception("Errors")
+    
+    def returnProductSlugs(self):
+        attributeValues = []
+        slugs = self.driver.find_elements_by_xpath("//*[@class='product_slug']")
+        if (slugs == " "):
+            raise Exception
+        
+        for i in slugs:
+            attributeValues.append(i.get_attribute("value"))
+        
+        return attributeValues
+    
+    '''Article Functions'''
+    def getArticleBody(self):
+        body = "//*[@id='body_box']/div[2]/div/div[3]"
+        checkArticleBody_ = self.pgActions_.assert_elementPresent(By.XPATH,body)
+        if (checkArticleBody_ is None):
+            return False
+        return self.pgActions_.find_ElementByXpath(body)
+        
     def setArticleBodyText(self,text):
         articleBodyText = self.getArticleBody()
         articleBodyText.clear()
         articleBodyText.send_keys(text)
         
     def getArticleDekBody(self):
-        articleDek = self.driver.find_element_by_xpath("//*[@class='row sub_heading_div']/div[2]")
-        if (articleDek is None):
+        dek = "//*[@class='row sub_heading_div']/div[2]"
+        checkArticleDek_ = self.pgActions_.assert_elementPresent(By.XPATH,dek) 
+        if (checkArticleDek_ is None):
             return False 
-        time.sleep(2)
-        return articleDek
+        return self.pgActions_.find_ElementByXpath(dek)
     
     def setArticleDekText(self,text):
         articleDek = self.getArticleDekBody()
         articleDek.clear()
         articleDek.send_keys(text)
        
-    def clickWYSIWYGFormatting(self,format,length,region = 'Dek'):
+    def clickWYSIWYGFormatting(self,format,region = 'Dek'):
         if (region == 'Dek'):
             articleBodyText = self.getArticleDekBody()
-<<<<<<< Updated upstream
             articleBodyText.send_keys(Keys.CONTROL,'A')
-            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
-            time.sleep(2)
-            formatting[0].click()
-        
-        elif (region == "body"):
-            articleDek = self.getArticleBody()
-            articleDek.send_keys(Keys.CONTROL,'A')
-            formatting = self.driver.find_elements_by_xpath("//*[@data-command-name='"+format+"']")
-            time.sleep(2)
-            formatting[1].click()
-=======
-            #articleBodyText.send_keys(Keys.CONTROL,'A')
-            for i in range(length):
-                articleBodyText.send_keys(Keys.SHIFT + Keys.LEFT)
             checkFormatting = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@data-command-name='"+format+"']")
             if (checkFormatting is True):
                 formatting = self.pgActions_.find_ElementsByXpath("//*[@data-command-name='"+format+"']")
@@ -86,15 +136,13 @@ class AddArticlePage(EditorialPage.EditorialPage):
             
         elif (region == "body"):
             articleBody = self.getArticleBody()
-            for i in range(length):
-                articleBody.send_keys(Keys.SHIFT + Keys.LEFT)
+            articleBody.send_keys(Keys.CONTROL,'A')
             checkFormatting = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@data-command-name='"+format+"']")
             if (checkFormatting is True):
                 formatting = self.pgActions_.find_ElementsByXpath("//*[@data-command-name='"+format+"']")
                 formatting[1].click()
             else:
                 raise Exception("Element Not Visible")
->>>>>>> Stashed changes
         
         elif (region == "directions"):
             directionsBody = self.getDirectionsBody()
@@ -112,10 +160,14 @@ class AddArticlePage(EditorialPage.EditorialPage):
         
     def clickHtmlView(self,num=1):
         htmlButton = self.driver.find_elements_by_xpath('//*[@class="toolbar-right"]/button[2]')
+        
         htmlButton[num].click()
         
     def getHtmlBody(self):
         return self.driver.find_element_by_xpath("//*[@id='body']").text
+    
+    def getBodyToolbarNoSpan(self):
+        return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div")
     
     def getBodyToolbar(self):
         return self.driver.find_elements_by_xpath("//*[@class='toolbar-group']/div/span")
@@ -136,7 +188,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False;
             
         articleBody.clear()
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         
         if (toolbar is None):
             return False
@@ -160,7 +212,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[3].click()
@@ -174,7 +226,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[1].click()
@@ -214,7 +266,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[1].click()
@@ -228,7 +280,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             return False
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[3].click()
@@ -289,8 +341,6 @@ class AddArticlePage(EditorialPage.EditorialPage):
         if (toolbar is None):
             return False
         toolbar[8].click()
-        
-        
         #internalLink = '$(".js-insert-internal-link").click()'
         #self.driver.execute_script(internalLink)    
     def clickTipsGalleryEmbed(self):
@@ -322,13 +372,15 @@ class AddArticlePage(EditorialPage.EditorialPage):
     def lightBox(self,type = "data-url"):
         
         lightBox = self.driver.find_element_by_id("lightbox")
+        
         if (lightBox is None):
             return False
+            
         lightBoxSearch = self.driver.find_elements_by_xpath("//*[@id='searchInputResultsInner']/div")
         if (lightBoxSearch == " "):
             return False
-        
-        randomContent = randint(0,len(lightBoxSearch))
+        #len(lightBoxSearch)
+        randomContent = randint(0,2)
         
         getContentUrl = lightBoxSearch[randomContent].get_attribute(type) 
         getContentTitle = lightBoxSearch[randomContent].get_attribute("data-title")
@@ -391,55 +443,56 @@ class AddArticlePage(EditorialPage.EditorialPage):
             
         articleBody.clear()
         
-        toolbar = self.getBodyToolbar()
-        
+        toolbar = self.getBodyToolbarNoSpan()
         if (toolbar is None):
             return False
         toolbar[6].click()
         
-        textBox = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
-        if (textBox is None):
+        checkTextBox = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
+        
+        if (checkTextBox is False):
             return False;
+        textBox = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/textarea")
         textBox.clear()
         textBox.send_keys(text)
         
-        dropDownList = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
-        dropDownList.find_element_by_xpath("//option[@value='"+type+"']").click()    
+        #dropDownList = self.driver.find_element_by_xpath("//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
+        dropDownList = self.pgActions_.assert_elementPresent(By.XPATH,"//*[@class='toolbar-btn btn-popup rams-icon rams-icon-embed active']/div/div/select[1]")
+        
+        if (dropDownList is False):
+            return False
+        
+        dropDownListClick = self.pgActions_.find_ElementByXpath("//option[@value='"+type+"']")
+        #.find_element_by_xpath("//option[@value='"+type+"']").click()    
+        dropDownListClick.click()
         
     def clickOnImageEmbedInsertButton(self):
-        getButton = self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[2]/div[3]/div[3]/div/button")
+        '''getButton = self.driver.find_element_by_xpath("//*[@id='body_box']/div[2]/div/div[2]/div[3]/div[3]/div/button")
         if (getButton is None):
             return False
-<<<<<<< Updated upstream
-        getButton.click()
-=======
         getButton.click()'''
-        time.sleep(.5)
         clickInsertButton = "$('.popup_imageInsertButton').click()"
         self.driver.execute_script(clickInsertButton)
->>>>>>> Stashed changes
         
     def getImageId(self):
         getBodytext = self.getHtmlBody()
         replaceStr = getBodytext.replace('loc="C"',"").replace('share="true"',"").replace('expand="true"',"").replace("image id=","").replace("[","").replace("]","").replace('"',"")
         return replaceStr
     
-<<<<<<< Updated upstream
-    def clickOnGalleryEmbedInsertButton(self,number = 0):
-        getButton = self.driver.find_elements_by_xpath("//*[@id='popup_galleryRight']/button")
-        if (getButton == " "):
-=======
     def clickOnGalleryEmbedInsertButton(self):
         getButton = self.driver.find_element_by_xpath("//*[@id='popup_galleryRight']/button")
         #getButton = self.driver.find_element_by_css_selector("html body div#wrapper.wrapper.templates-present div#contents form.article_form.general_form div.table div.tablerow div.tablecell_rightnav div#body_box.segment div.panel.shaded div.row.article_body div.wysiwyg-toolbar.js-wysiwyg-toolbar div.toolbar-group div.toolbar-btn.btn-popup.rams-icon.rams-icon-gallery.active div.wysiwyg-popup.wysiwyg-popup-embed-gallery div#popup_galleryRight button.popup_galleryInsertButton.white")
         #("//*[@id='popup_galleryRight']")
         if (getButton is None):
->>>>>>> Stashed changes
+            print "ME"
             return False
-        #print "ClickButton"
-        getButton[number].click()
+        getButton.click()
+        #ActionChains(self.driver).move_to_element_with_offset(getButton, 0, 20).click().perform()
         #embedButton = '$("#popup_galleryRight").eq(1).click()'
         #self.driver.execute_script(embedButton)
+        #embedGalleryButton = "('.popup_galleryInsertButton').click()"
+        #self.driver.execute_script(embedGalleryButton)
+        
         
     def getGalleryId(self):
         getBodytext = self.getHtmlBody()
@@ -457,11 +510,7 @@ class AddArticlePage(EditorialPage.EditorialPage):
             if option.text == type:
                 option.click()
             else:
-<<<<<<< Updated upstream
-                throw_error("Error")
-=======
-                raise Exception("Cannot Click")
->>>>>>> Stashed changes
+                print "Error Dude"
         
     
     def getIngredients(self):
@@ -503,175 +552,6 @@ class AddArticlePage(EditorialPage.EditorialPage):
         tipsTextBox.clear()
         tipsTextBox.send_keys(text)
         
-<<<<<<< Updated upstream
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
 
-        
-                
-=======
-    def setItemsToCart(self,text="Headline Test",data=[]):
-        articleBody = self.getArticleBody()
-        if (articleBody is None):
-            raise Exception("Article Body Cannot Be Found")
-            
-        articleBody.clear()
-        toolbar = self.getBodyToolbarNoSpan()
-        
-        if (toolbar is None):
-            raise Exception("Toolbar cannot be found")
-        
-        toolbar[11].click()
-        
-        headline = self.driver.find_element_by_xpath("//*[@id='popup_shopHeadline']/input")
-        headline.send_keys(text)
-        getProductsTextField = self.driver.find_elements_by_xpath("//*[@id='popup_shopProducts']/div/input")
-        fields = len(getProductsTextField)
-        items = len(data)
-        
-        randomContent = random.sample(data,items)
-        
-        for i in range(fields):
-            getProductsTextField[i].send_keys(randomContent[i])
-        
-        if (fields < items):
-                insertButton = self.driver.find_element_by_xpath(".//*[@class='popup_shopButtons']/a/i")
-                insertButton.click()
-                getProductsTextField = self.driver.find_elements_by_xpath("//*[@id='popup_shopProducts']/div/input")
-                getProductsTextField[3].send_keys(data[3])
-                
-        else:
-                raise Exception("A Text field can't be added!")
-        
-        clickInsertButton = self.driver.find_element_by_xpath(".//*[@class='popup_shopButtons']/button")
-        clickInsertButton.click()
-        
-        
-    def returnSlugData(self):
-        slugData = []
-        getUrls = self.help.getRandomSlugs()
-        if (getUrls == " "):
-            raise Exception("No Slugs Returned")
-        
-        for url in getUrls:
-            data = url.replace("http://shop.harpersbazaar.com/designers","")
-            slugData.append(data)
-        
-        return slugData
-    
-    def checkForSlugsInArticles(self,slugData):
-        myList = []
-        getSlugs =  self.getHtmlBody()
-        if (getSlugs is None):
-            raise Exception("No Slugs found in HtmlBody")     
-        
-        slugs = getSlugs.replace("[shop headline=""\"TestHeadlines\" source=""\"bazaar\" slugs=\"","")
-        strippedSlugs = slugs.split(',')
-        for element in slugData:
-            if element in strippedSlugs:
-                myList.append(element)
-            for i in myList:
-                if i in strippedSlugs:
-                    return True
-                else:
-                    return False
-
-    def setghkItemsToCart(self,data,text="Headline Test"):
-        articleBody = self.getArticleBody()
-        if (articleBody is None):
-            return False;
-            
-        articleBody.clear()
-        toolbar = self.getBodyToolbarNoSpan()
-        
-        if (toolbar is None):
-            return False
-        
-        toolbar[11].click()
-        
-        headline = self.driver.find_element_by_xpath(".//*[@id='popup_shopHeadline']/input")
-        headline.send_keys(text)
-        getProductsTextField = self.driver.find_element_by_xpath("//*[@id='popup_shopProductID']/input")
-        getProductsTextField.send_keys(data)
-        clickInsertButton = self.driver.find_element_by_xpath(".//*[@class='popup_shopButtons']/button")
-        clickInsertButton.click()
-    
-    def getBodySlug(self):
-        slug = self.pgActions_.assert_ElementIsPresent(By.XPATH, "//*[@id='slug']")
-        return slug
-    
-    def clickImageUpload(self):
-        script = "$('.header-content--overlay').click()"
-        self.driver.execute_script(script)
-      
-    def clickUploadImage(self):
-        uploadImage = self.driver.find_element_by_xpath("//*[@id='topTabs']/span[2]")
-        if (uploadImage is None):
-            return False
-        uploadImage.click()
-            
-    def getDataImageId(self):
-        if self.pgActions_.assert_elementPresent(By.ID, "popup_imagePlaceholder") is None:
-            raise Exception
-        return self.pgActions_.find_ElementByID("popup_imagePlaceholder").get_attribute("data-imageid")
-        
-    def clickLeadImageSearch(self):
-        search = '$(".rams-icon-search").eq(1).click()'
-        self.driver.execute_script(search)
-        id = self.pgActions_.assert_elementPresent(By.ID,"searchInputResultsInner")
-        
-    def searchLeadImage(self,title):
-        searchInput = "//*[@id='searchInputBox']/div/div[1]/input[2]"
-        checkSearchInputBox = self.pgActions_.assert_ElementIsPresent(By.XPATH,searchInput)
-        if (checkSearchInputBox is None):
-            raise Exception
-        if self.pgActions_.assert_ElementIsPresent(By.XPATH, "//*[@id='searchInputResults']/div/div") is None:
-            raise Exception
-        inputBox = self.pgActions_.find_ElementByXpath(searchInput)
-        inputBox.send_keys(title)
-    
-    def clickImageInsideSearch(self, num=0, type = "data-url"):
-        checkImageisPresent = self.pgActions_.assert_ElementIsPresent(By.XPATH,"//*[@id='searchInputResultsInner']/div")
-        if checkImageisPresent is None:
-            raise Exception
-        lightBoxSearch = self.driver.find_elements_by_xpath("//*[@id='searchInputResultsInner']/div")
-        if (lightBoxSearch == " "):
-            return False
-        getContentUrl = lightBoxSearch[num].get_attribute(type)
-        getContentTitle = lightBoxSearch[num].get_attribute("data-title")
-        if (getContentUrl == '' or getContentTitle == ''):
-            raise Exception("Content not returned")
-        lightBoxSearch[num].click()
-        return (getContentUrl,getContentTitle)
-        
-
-    def getRandomProductIds(self):
-        productIds = ['B00BNLRDZK','B00ICWK6RK','B00C1RX1AQ','B008DI8D7S','B00M7G7ZVW','B004Y1NMN8',
-        'B00520C736','B00HNG8ZFQ','B007U9914K','B0080YHBR8','B00H1W9I6C','B009GMUL84','B007MQLMF2',
-        'B00BNLRDZK','0672329468','1593272200','1449339530','0596005903','1466518030','1593275676']
-        randomIDs = randint(0,len(productIds)-1)
-        return productIds[randomIDs]
-    
-    def stripProductIds(self):
-        returnIDMatch = re.findall('product_id="[a-z1-10A-Z1-10-a-z1-10A-z1-10\"]+"',self.getHtmlBody())
-        for i in returnIDMatch:
-            strippedID = i.replace("product_id=","").replace("\"","")
-            return strippedID
->>>>>>> Stashed changes

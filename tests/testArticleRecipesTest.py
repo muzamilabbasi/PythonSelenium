@@ -3,7 +3,12 @@ from pages.frontend import ArticlePage
 from classes import seleniumDriver
 import time,datetime
 import unittest
+<<<<<<< Updated upstream
 from numpy.f2py.auxfuncs import throw_error
+=======
+from configobj import ConfigObj
+import sys
+>>>>>>> Stashed changes
 
 class testArticleRecipesTest(seleniumDriver.seleniumDriver):
     
@@ -13,8 +18,18 @@ class testArticleRecipesTest(seleniumDriver.seleniumDriver):
         addArticlePage = AP.AddArticlePage(self.driver,"m.php?t=articles") 
         addArticlePage.getRandomEditorialArticle()
         
+<<<<<<< Updated upstream
         currentTime = time.strftime("%H:%M:%S")        
         setText = "Default test value"
+=======
+        if (sys.platform == "darwin"):
+            config = ConfigObj('/usr/local/bin/setup.cfg')
+        elif (sys.platform == "windows"):
+            config = ConfigObj('../setup.cfg')    
+            
+        site = config['nosetests']['site']
+        if (site == "goodhousekeeping"  or site == "countryliving" or site == "womansdays" or site == "delish" or site == "redbook"):
+>>>>>>> Stashed changes
         
         #select ContentType by default it select Recipes
         addArticlePage.getContent()

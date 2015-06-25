@@ -14,21 +14,23 @@ class EditorialPage(RamsPage.RamsPage):
     def save(self):                 
         lastSaveTimeElement = self.driver.find_element_by_class_name('last_saved');
         if(lastSaveTimeElement is None):
-            print "None"
             return False
         lastSaveTime = lastSaveTimeElement.text    
         element = self.driver.find_element_by_class_name('save_button')
         if(element is None):
-            print "2nd Wale"
             return False
         
         element.click()
+<<<<<<< Updated upstream
         time.sleep(2)
        
+=======
+        time.sleep(5)
+>>>>>>> Stashed changes
         if(lastSaveTimeElement.text not in lastSaveTime):
             return True;
         else:
-            return False
+            raise Exception("Cannot Save")
 
     def getPreviewUrl(self):
         previewUrlElement = self.driver.find_element_by_class_name('preview')

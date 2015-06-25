@@ -12,13 +12,15 @@ class PageActions(unittest.TestCase):
 
     def __init__(self, driver):
         self.driver = driver
-        #self.env = EnvConfig.EnvConfig()
-        #self.prop = getProperty.getProperty()
-    
+       
     '''this function is Waits for an element to be found,'''    
     def assert_elementPresent(self, how, what):
         try:
+<<<<<<< Updated upstream
             wait = WebDriverWait(self.driver,5)
+=======
+            wait = WebDriverWait(self.driver,60)
+>>>>>>> Stashed changes
             wait.until(EC.presence_of_element_located((how,what)))
             return True
         except:
@@ -57,9 +59,7 @@ class PageActions(unittest.TestCase):
     
     
     '''page related functions'''
-    
     def typeElementName(self,how,what,text):
-        
         time.sleep(1)
         if self.assert_elementPresent(how,what):
             self.find_ElementByName(what).send_keys(text)

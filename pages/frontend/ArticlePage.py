@@ -131,9 +131,7 @@ class ArticlePage(unittest.TestCase):
         getUrl = self.driver.find_element_by_xpath("/html/body/div[4]/article/div[1]/div[2]/div[2]/div[2]/div[2]/div/div/iframe")
         if (getUrl is None):
             return False
-        
-        url = getUrl.get_attribute("src")
-        return url.replace("http://media.mtvnservices.com/embed/mgid:uma:video:mtv.com:", " ")
+        return True
     
     def getFunnyOrDieUrl(self):
         getUrl = self.driver.find_element_by_xpath("//*[@id='videoContainer']/div[1]/div/video")
